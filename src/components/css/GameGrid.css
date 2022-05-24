@@ -1,0 +1,34 @@
+
+#container {
+    margin-left: 15vw;
+}
+
+.game-grid {
+    width: 34.5vw;
+    margin-top: 35vh;
+    float: left;
+    display: grid;
+    padding: 3px;
+    grid-gap: 5px;
+    grid-template-columns: repeat(3, 11vw);
+}
+
+.p-tile {
+    background-color: #444;
+    color: #fff;
+    height: 11vh;
+    border-radius: 5px;
+}
+
+.e-tile {
+    background-color: red;
+    color: #fff;
+    height: 11vh;
+    border-radius: 5px;
+}
+
+.participant-img {
+    width: 5.5vh;
+    height: 5.5vh;
+    margin-top: 2.75vh;
+}
