@@ -8,6 +8,7 @@ export default function GameGrid() {
     const [playerPosition, setPlayerPosition] = useState(initialPos);
     const [enemyPosition, setEnemyPosition] = useState(initialPos);
     const enemyPosRef = useRef(initialPos);
+    const [cdText, setCdText] = useState("");
 
     useEffect(() => {
         window.addEventListener("keydown", handleMovementInput);
@@ -54,52 +55,31 @@ export default function GameGrid() {
     }
 
     const handleEnemyMovement = () => {
-        // confirm functions in movementLogic work
         setInterval(() => {
-            let availablePosList = mLogic.findAvailablePositions(enemyPosRef.current);
+            let availablePosList = mLogic.findAvailablePositions(grid, enemyPosRef.current);
             let selectedPos = Math.floor(Math.random() * availablePosList.length);
-            mLogic.findCoordinatesForPos(grid, availablePosList[selectedPos]);
+            mLogic.findCoordinatesForPos(grid, availablePosList[selectedPos], setEnemyPosition);
         }, 2000);
     }
 
-    // const findCoordinatesForPos = (cellNumber) => {
-    //     let yCount = 0;
-    //     grid.forEach(row => {
-    //         let xCount = 0;
-    //         row.forEach(cell => {
-    //             if (cell === cellNumber) {
-    //                 let newPos = {x: xCount, y: yCount};
-    //                 setEnemyPosition(newPos);
-    //             } else {
-    //                 xCount++;
-    //             }
-    //         });
-    //         yCount++;
-    //     });
-    // }
-
-    // const findAvailablePositions = (pos) => {
-    //     let posList = [];
-    //     posList.push(grid[pos.y][pos.x]);
-
-    //     if (pos.y > 0) {
-    //         posList.push(grid[pos.y - 1][pos.x]);
-    //     }
-
-    //     if (pos.x > 0) {
-    //         posList.push(grid[pos.y][pos.x - 1]);
-    //     }
+    const løg = (e) => {
+        let updateInterval = 1000 / 60;
+        let time = 2000 - updateInterval;
+        e.target.style.opacity = 0.2;
+        console.log(e.target.style)
         
-    //     if (pos.y < 2) {
-    //         posList.push(grid[pos.y + 1][pos.x]);
-    //     }
+        const i = setInterval(() => {
+            // e.target.textContent = (time / 1000).toFixed(2);
+            setCdText((time / 1000).toFixed(2));
+            time -= updateInterval;
 
-    //     if (pos.x < 2) {
-    //         posList.push(grid[pos.y][pos.x + 1]); 
-    //     }
-
-    //     return posList;
-    // }
+            if (time < 0) {
+                e.target.style = "";
+                setCdText("");
+                clearInterval(i);
+            }
+        }, updateInterval);
+    }
 
     return (
         <div id="container">
@@ -114,9 +94,9 @@ export default function GameGrid() {
                                     }
                                 </div>
                             )
-                        })
-                    )
-                })}
+                        }))
+                    })
+                }
             </div>
             <div className="game-grid">
                 {grid.map(row => {
@@ -129,11 +109,35 @@ export default function GameGrid() {
                                     }
                                 </div>
                             )
-                        })
-                    )
-                })}
+                        }))
+                    })
+                }
             </div>
-            <button onClick={handleEnemyMovement}>Test</button>
+            <div id="ability-grid">
+                <div className="ability">
+                    <p style={{position: "absolute", textAlign: "center", width: "3em", marginLeft: "3px", fontSize: "14px"}}>{cdText}</p>
+                    <img onClick={løg} className="ability-img" alt="" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbViMjSEIerg64-6m-J_Qz4BD6MPhHHIWATw&usqp=CAU" />
+                </div>
+                <div className="ability">
+                </div>
+                <div className="ability">
+                </div>
+                <div className="ability">
+                </div>
+                <div className="ability">
+                </div>
+                <div className="ability">
+                </div>
+                <div className="ability">
+                </div>
+                <div className="ability">
+                </div>
+                <div className="ability">
+                </div>
+                <div className="ability">
+                </div>
+            </div>
         </div>
     )
 }
+

@@ -1,7 +1,7 @@
 
 const movementLogic = () => {
 
-    const findAvailablePositions = (pos) => {
+    const findAvailablePositions = (grid, pos) => {
         let posList = [];
         posList.push(grid[pos.y][pos.x]);
 
@@ -24,7 +24,7 @@ const movementLogic = () => {
         return posList;
     }
     
-    const findCoordinatesForPos = (grid, cellNumber) => {
+    const findCoordinatesForPos = (grid, cellNumber, setEnemyPosition) => {
         let yCount = 0;
         grid.forEach(row => {
             let xCount = 0;
