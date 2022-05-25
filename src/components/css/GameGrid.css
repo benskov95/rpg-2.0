@@ -3,7 +3,6 @@
     margin: auto;
     margin-top: 5vh;
     width: 90vw;
-    height: 90vh;
 }
 
 .game-grid {
@@ -16,18 +15,8 @@
     grid-template-columns: repeat(3, 11vw);
 }
 
-.p-tile {
+.tile {
     background-color: #444;
-    border: 1px solid blue;
-    color: #fff;
-    height: 11vh;
-    border-radius: 5px;
-}
-
-.e-tile {
-    background-color: #444;
-    border: 1px solid red;
-    color: #fff;
     height: 11vh;
     border-radius: 5px;
 }
@@ -39,25 +28,44 @@
 }
 
 #ability-grid {
-    width: 5.5vw;
-    margin: 2vh 0px 0px 7vw;
+    margin: 1vh 0px 0px 7vw;
     float: left;
     display: grid;
     padding: 3px;
     grid-gap: 5px;
-    grid-template-columns: repeat(5, 3em);
+    grid-template-columns: repeat(5, 3vw);
 }
 
 .ability {
     background-color: #444;
-    height: 3em;
-    width: 3em;
-    border-radius: 50px;
+    height: 3vw;
+    width: 3vw;
     border: 1px solid gray;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+.ability:hover {
+    border: 1px solid gold;
 }
 
 .ability-img {
-    height: 3em;
-    width: 3em;
+    height: inherit;
+    width: inherit;
     border-radius: inherit;
+}
+
+.ability-bind {
+    position: absolute;
+    width: 2%;
+    margin: 0px 0px 0px 1.2vw;
+    font-size: 0.7vw;
+    font-style: bold;
+}
+
+.ability-cd-text {
+    position: absolute;
+    width: 2%;
+    margin: 0.8vw 0px 0px 0.4vw;
+    font-size: 0.9vw;
 }
