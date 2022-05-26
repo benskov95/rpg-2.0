@@ -1,6 +1,16 @@
 const combatLogic = () => {
     const abilitiesOnCd = [];
 
+    const handleAbilityInput = (e) => {
+        // cLogic.startAbilityCd(
+        //     abilitiesRef.current[0],
+        //     setCdText,
+        //     currentTileRef,
+        //     eTilesRef,
+        //     playerPosition
+        // );
+    }
+
     const beginAbilityAnimation = (currentTileRef, eTilesRef, playerPosition) => {
         let totalAnimationTime = 1500;
         let animationInterval = 500;
@@ -54,6 +64,7 @@ const combatLogic = () => {
     }
 
     return {
+        handleAbilityInput,
         startAbilityCd,
     }
 }

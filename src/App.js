@@ -1,9 +1,9 @@
-import GameGrid from "./components/GameGrid";
+import Battle from "./components/Battle";
 
 export default function App() {
   return (
     <div>
-      <GameGrid />
+      <Battle />
     </div>
   );
 }
