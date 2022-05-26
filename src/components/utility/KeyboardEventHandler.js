@@ -29,17 +29,17 @@ export default function KeyboardEventHandler(props) {
     }
 
     const handleInput = (key) => {
-        console.log(props)
-        // props.keybinds.forEach(keybind => {
-        //     if (shiftDown && keybind.includes("shift") 
-        //     && keybind.includes(keyConverter[key])) {
-                
-        //     } else if (altDown && keybind.includes(key)) {
+        props.abilityKeybinds.forEach(keybind => {
+            let converted = keyConverter[key];
+            if (shiftDown && keybind.includes("shift") 
+            && keybind.includes(converted)) {
+                props.abilityFunc(converted, props.abilityFuncArgs[0], props.abilityFuncArgs[1], props.abilityFuncArgs[2], props.abilityFuncArgs[3], props.abilityFuncArgs[4])
+            } else if (altDown && keybind.includes(key)) {
 
-        //     } else {
-        //         props.onEventFunc(key, props.onEventFuncArgs[0], props.onEventFuncArgs[1]);
-        //     }
-        // })
+            } else {
+                props.movementFunc(key, props.movementFuncArgs[0], props.movementFuncArgs[1]);
+            }
+        })
     }
 
     const upHandler = (e) => {

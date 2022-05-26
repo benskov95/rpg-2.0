@@ -15,13 +15,13 @@ export default function Battle() {
     const enemyPosRef = useRef(pLogic.initialPos);
     const currentTileRef = useRef("");
 
-    useEffect(() => {
-        enemyPosRef.current = enemyPosition;
-        window.addEventListener("keydown", handleInput);
-        return () => {
-            window.removeEventListener("keydown", handleInput);
-        }
-    });
+    // useEffect(() => {
+    //     enemyPosRef.current = enemyPosition;
+    //     window.addEventListener("keydown", handleInput);
+    //     return () => {
+    //         window.removeEventListener("keydown", handleInput);
+    //     }
+    // });
 
     const handleInput = (e) => {
         // new component for abilities with logic from keyboardeventhandler
@@ -47,6 +47,15 @@ export default function Battle() {
             position={enemyPosition}
             tilesRef={eTilesRef}
             borderColor="red" />
+
+            <KeyboardEventHandler
+            movementKeybinds={["w", "a", "s", "d"]}
+            abilityKeybinds={["2", "shift+1"]}
+            movementFunc={pLogic.handlePlayerMovement}
+            movementFuncArgs={[playerPosition, setPlayerPosition]} 
+            abilityFunc={cLogic.handleAbility}
+            abilityFuncArgs={[abilitiesRef.current[0], setCdText, currentTileRef, eTilesRef, playerPosition ]}
+            />
 
             <div id="ability-grid">
                     <div className="ability">

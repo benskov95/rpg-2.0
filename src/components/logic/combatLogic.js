@@ -1,39 +1,16 @@
+
 const combatLogic = () => {
     const abilitiesOnCd = [];
 
-    const handleAbilityInput = (e) => {
-        // cLogic.startAbilityCd(
-        //     abilitiesRef.current[0],
-        //     setCdText,
-        //     currentTileRef,
-        //     eTilesRef,
-        //     playerPosition
-        // );
-    }
-
-    const beginAbilityAnimation = (currentTileRef, eTilesRef, playerPosition) => {
-        let totalAnimationTime = 1500;
-        let animationInterval = 500;
-        let count = 0;
-        let casterYPos = playerPosition.y * 3;
-
-        const i = setInterval(() => {
-            if (count > 0) {
-                currentTileRef.current.style.backgroundColor = "";
-            }
-
-            currentTileRef.current = eTilesRef.current[count + casterYPos]
-            currentTileRef.current.style.backgroundColor = "darkred";
-            count++;
-            totalAnimationTime -= animationInterval;
-
-            if (totalAnimationTime <= 0) {
-                setTimeout(() => {
-                    currentTileRef.current.style.backgroundColor = "";
-                }, animationInterval);
-                clearInterval(i);
-            }
-        }, animationInterval);
+    const handleAbility = (key, usedAbility, setCdText, currentTileRef, eTilesRef, playerPosition) => {
+        console.log(key)
+        switch(key) {
+            case "1":
+                startAbilityCd(usedAbility, setCdText, currentTileRef, eTilesRef, playerPosition);
+                break;
+            default:
+                break;
+        }
     }
 
     const startAbilityCd = (usedAbility, setCdText, currentTileRef, eTilesRef, playerPosition) => {
@@ -63,9 +40,33 @@ const combatLogic = () => {
         }, updateInterval);
     }
 
+    const beginAbilityAnimation = (currentTileRef, eTilesRef, playerPosition) => {
+        let totalAnimationTime = 1500;
+        let animationInterval = 500;
+        let count = 0;
+        let casterYPos = playerPosition.y * 3;
+
+        const i = setInterval(() => {
+            if (count > 0) {
+                currentTileRef.current.style.backgroundColor = "";
+            }
+
+            currentTileRef.current = eTilesRef.current[count + casterYPos]
+            currentTileRef.current.style.backgroundColor = "darkred";
+            count++;
+            totalAnimationTime -= animationInterval;
+
+            if (totalAnimationTime <= 0) {
+                setTimeout(() => {
+                    currentTileRef.current.style.backgroundColor = "";
+                }, animationInterval);
+                clearInterval(i);
+            }
+        }, animationInterval);
+    }
+
     return {
-        handleAbilityInput,
-        startAbilityCd,
+        handleAbility,
     }
 }
 

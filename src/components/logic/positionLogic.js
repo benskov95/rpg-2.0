@@ -3,10 +3,10 @@ const positionLogic = () => {
     const battleGrid = [[0, 1, 2], [3, 4, 5], [6, 7, 8]];
     const initialPos = {x: 1, y: 1};
 
-    const handlePlayerMovement = (e, playerPosition, setPlayerPosition) => {
+    const handlePlayerMovement = (key, playerPosition, setPlayerPosition) => {
         let newPos = {...playerPosition};
 
-        switch(e.key) {
+        switch(key) {
             case "w":
                 if (playerPosition.y > 0) {
                     newPos.y -= 1;
