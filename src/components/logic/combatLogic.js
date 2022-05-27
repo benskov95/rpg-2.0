@@ -2,23 +2,12 @@
 const combatLogic = () => {
     const abilitiesOnCd = [];
 
-    const handleAbility = (key, usedAbility, setCdText, currentTileRef, eTilesRef, playerPosition) => {
-        console.log(key)
-        switch(key) {
-            case "1":
-                startAbilityCd(usedAbility, setCdText, currentTileRef, eTilesRef, playerPosition);
-                break;
-            default:
-                break;
-        }
-    }
-
-    const startAbilityCd = (usedAbility, setCdText, currentTileRef, eTilesRef, playerPosition) => {
+    const startAbilityCd = (usedAbility, abilities, setAbilities, currentTileRef, eTilesRef, playerPosition) => {
         let updateInterval = 1000 / 60
         let time = 2000 - updateInterval;
 
         if (abilitiesOnCd.find(ab => ab.abilityName === usedAbility.name) === undefined) {
-            usedAbility.style.opacity = "0.2";
+            usedAbility.opacity = "0.2";
             beginAbilityAnimation(currentTileRef, eTilesRef, playerPosition);
         } else {
             return;
@@ -28,12 +17,14 @@ const combatLogic = () => {
         abilitiesOnCd.push(abilityOnCd);
 
         abilityOnCd.activeCd = setInterval(() => {
-            setCdText((time / 1000).toFixed(1));
+            let hmm = [...abilities];
+            hmm.find(x => x.name === usedAbility.name).cdText = (time / 1000).toFixed(1)
+            setAbilities(hmm);
             time -= updateInterval;
 
             if (time < 0) {
-                usedAbility.style.opacity = "1";
-                setCdText("");
+                usedAbility.opacity = "1";
+                usedAbility.cdText = "";
                 clearInterval(abilityOnCd.activeCd);
                 abilitiesOnCd.splice(abilitiesOnCd.indexOf(abilityOnCd));
             }
@@ -50,12 +41,13 @@ const combatLogic = () => {
             if (count > 0) {
                 currentTileRef.current.style.backgroundColor = "";
             }
-
-            currentTileRef.current = eTilesRef.current[count + casterYPos]
+            
+            // multiple animations running simultaneously cause some tiles to stay colored. maybe ref is the problem?
+            currentTileRef.current = eTilesRef.current[count + casterYPos];
             currentTileRef.current.style.backgroundColor = "darkred";
             count++;
             totalAnimationTime -= animationInterval;
-
+            
             if (totalAnimationTime <= 0) {
                 setTimeout(() => {
                     currentTileRef.current.style.backgroundColor = "";
@@ -66,7 +58,7 @@ const combatLogic = () => {
     }
 
     return {
-        handleAbility,
+        startAbilityCd,
     }
 }
 

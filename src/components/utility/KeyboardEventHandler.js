@@ -29,17 +29,44 @@ export default function KeyboardEventHandler(props) {
     }
 
     const handleInput = (key) => {
-        props.abilityKeybinds.forEach(keybind => {
-            let converted = keyConverter[key];
-            if (shiftDown && keybind.includes("shift") 
-            && keybind.includes(converted)) {
-                props.abilityFunc(converted, props.abilityFuncArgs[0], props.abilityFuncArgs[1], props.abilityFuncArgs[2], props.abilityFuncArgs[3], props.abilityFuncArgs[4])
-            } else if (altDown && keybind.includes(key)) {
+        props.abilityFuncArgs[0].forEach(ability => {
+            if ((shiftDown && ability.keybind.includes("shift") 
+                && ability.keybind.includes(keyConverter[key])) 
+                || (altDown && ability.keybind.includes("alt") 
+                && ability.keybind.includes(keyConverter[key]))) {
 
+                props.abilityFunc
+                (
+                    ability,
+                    props.abilityFuncArgs[0], 
+                    props.abilityFuncArgs[1], 
+                    props.abilityFuncArgs[2], 
+                    props.abilityFuncArgs[3], 
+                    props.abilityFuncArgs[4]
+                );
             } else {
-                props.movementFunc(key, props.movementFuncArgs[0], props.movementFuncArgs[1]);
+                if (ability.keybind === key) {
+                    props.abilityFunc
+                    (
+                        ability, 
+                        props.abilityFuncArgs[0],
+                        props.abilityFuncArgs[1], 
+                        props.abilityFuncArgs[2], 
+                        props.abilityFuncArgs[3], 
+                        props.abilityFuncArgs[4]
+                        );
+                    }
+                }
             }
-        })
+        );
+
+        // swap key with generic name variable (like up, down etc.) with associated keybind
+        props.movementFunc
+        (
+            key, 
+            props.movementFuncArgs[0], 
+            props.movementFuncArgs[1]
+        );
     }
 
     const upHandler = (e) => {
