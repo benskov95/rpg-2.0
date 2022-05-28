@@ -7,27 +7,27 @@ const positionLogic = () => {
         let newPos = {...playerPosition};
 
         switch(key) {
-            case "ArrowUp":
+            case "up":
                 if (playerPosition.y > 0) {
                     newPos.y -= 1;
                     setPlayerPosition(newPos);
                 } 
                 break;
-            case "ArrowLeft":
-                if (playerPosition.x > 0) {
-                    newPos.x -= 1;
+            case "right":
+                if (playerPosition.x < (battleGrid[0].length - 1)) {
+                    newPos.x += 1;
                     setPlayerPosition(newPos);
                 }
                 break;
-            case "ArrowDown":
+            case "down":
                 if (playerPosition.y < (battleGrid[0].length - 1)) {
                     newPos.y += 1;
                     setPlayerPosition(newPos);
                 }
                 break;
-            case "ArrowRight":
-                if (playerPosition.x < (battleGrid[0].length - 1)) {
-                    newPos.x += 1;
+            case "left":
+                if (playerPosition.x > 0) {
+                    newPos.x -= 1;
                     setPlayerPosition(newPos);
                 }
                 break;

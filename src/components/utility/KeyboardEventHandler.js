@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { keyConverter } from "./keyConverter";
+import { shiftKeyConverter } from "./keyConverter";
 
 export default function KeyboardEventHandler(props) {
     const [shiftDown, setShiftDown] = useState(false);
@@ -28,47 +28,6 @@ export default function KeyboardEventHandler(props) {
         }
     }
 
-    const handleInput = (key) => {
-        props.abilityFuncArgs[0].forEach(ability => {
-            if ((shiftDown && ability.keybind.includes("shift") 
-                && ability.keybind.includes(keyConverter[key])) 
-                || (altDown && ability.keybind.includes("alt") 
-                && ability.keybind.includes(keyConverter[key]))) {
-
-                props.abilityFunc
-                (
-                    ability,
-                    props.abilityFuncArgs[0], 
-                    props.abilityFuncArgs[1], 
-                    props.abilityFuncArgs[2], 
-                    props.abilityFuncArgs[3], 
-                    props.abilityFuncArgs[4]
-                );
-            } else {
-                if (ability.keybind === key) {
-                    props.abilityFunc
-                    (
-                        ability, 
-                        props.abilityFuncArgs[0],
-                        props.abilityFuncArgs[1], 
-                        props.abilityFuncArgs[2], 
-                        props.abilityFuncArgs[3], 
-                        props.abilityFuncArgs[4]
-                        );
-                    }
-                }
-            }
-        );
-
-        // swap key with generic name variable (like up, down etc.) with associated keybind
-        props.movementFunc
-        (
-            key, 
-            props.movementFuncArgs[0], 
-            props.movementFuncArgs[1]
-        );
-    }
-
     const upHandler = (e) => {
         switch(e.key) {
             case "Shift":
@@ -79,6 +38,50 @@ export default function KeyboardEventHandler(props) {
                 break;
             default:
                 break;
+        }
+    }
+
+    const handleInput = (key) => {
+        props.keybinds.hotbar.forEach(btn => {
+            if ((shiftDown && btn.keybind.includes("shift") 
+                && btn.keybind.includes(shiftKeyConverter[key])) 
+                || (altDown && btn.keybind.includes("alt") 
+                && btn.keybind.includes(key))) {
+
+                props.abilityFunc
+                (
+                    btn,
+                    props.keybinds,
+                    props.setKeybinds,
+                    props.abilityFuncArgs[0], 
+                    props.abilityFuncArgs[1], 
+                    props.abilityFuncArgs[2]
+                );
+            } else {
+                if (btn.keybind === key) {
+                    props.abilityFunc
+                    (
+                        btn, 
+                        props.keybinds,
+                        props.setKeybinds,
+                        props.abilityFuncArgs[0],
+                        props.abilityFuncArgs[1], 
+                        props.abilityFuncArgs[2]
+                        );
+                    }
+                }
+            }
+        );
+
+        for (const keybind in props.keybinds.movement) {
+            if (key === props.keybinds.movement[keybind]) {
+                props.movementFunc
+                (
+                    keybind, 
+                    props.movementFuncArgs[0], 
+                    props.movementFuncArgs[1]
+                );
+            }
         }
     }
 

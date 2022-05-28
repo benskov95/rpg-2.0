@@ -2,55 +2,57 @@
 const combatLogic = () => {
     const abilitiesOnCd = [];
 
-    const startAbilityCd = (usedAbility, abilities, setAbilities, currentTileRef, eTilesRef, playerPosition) => {
-        let updateInterval = 1000 / 60
-        let time = 2000 - updateInterval;
+    const startAbilityCd = (btn, keybinds, setKeybinds, abilities, eTilesRef, playerPosition) => {
+        const usedAbility = abilities.find(ab => ab.id === btn.abilityId);
+        const updateInterval = 1000 / 60;
+        let time = usedAbility.cooldown - updateInterval;
 
-        if (abilitiesOnCd.find(ab => ab.abilityName === usedAbility.name) === undefined) {
-            usedAbility.opacity = "0.2";
-            beginAbilityAnimation(currentTileRef, eTilesRef, playerPosition);
+        if (abilitiesOnCd.find(ab => ab.name === btn.name) === undefined) {
+            btn.opacity = "0.2";
+            beginAbilityAnimation(usedAbility, eTilesRef, playerPosition);
         } else {
             return;
         }
 
-        let abilityOnCd = {abilityName: usedAbility.name, activeCd: ""};
+        let abilityOnCd = {name: btn.name};
         abilitiesOnCd.push(abilityOnCd);
 
         abilityOnCd.activeCd = setInterval(() => {
-            let hmm = [...abilities];
-            hmm.find(x => x.name === usedAbility.name).cdText = (time / 1000).toFixed(1)
-            setAbilities(hmm);
+            let copy = {...keybinds};
+            copy.hotbar.find(x => x.name === btn.name).cdText = (time / 1000).toFixed(1)
+            setKeybinds(copy);
             time -= updateInterval;
 
             if (time < 0) {
-                usedAbility.opacity = "1";
-                usedAbility.cdText = "";
+                btn.opacity = "1";
+                btn.cdText = "";
                 clearInterval(abilityOnCd.activeCd);
                 abilitiesOnCd.splice(abilitiesOnCd.indexOf(abilityOnCd));
             }
         }, updateInterval);
     }
 
-    const beginAbilityAnimation = (currentTileRef, eTilesRef, playerPosition) => {
-        let totalAnimationTime = 1500;
-        let animationInterval = 500;
+    const beginAbilityAnimation = (usedAbility, eTilesRef, playerPosition) => {
+        const animationInterval = usedAbility.animation.animationInterval;
+        const casterYPos = playerPosition.y * 3;
+        let totalAnimationTime = usedAbility.animation.animationTime;
         let count = 0;
-        let casterYPos = playerPosition.y * 3;
+        let currentTile;
 
         const i = setInterval(() => {
             if (count > 0) {
-                currentTileRef.current.style.backgroundColor = "";
+                currentTile.style.backgroundColor = "";
             }
             
             // multiple animations running simultaneously cause some tiles to stay colored. maybe ref is the problem?
-            currentTileRef.current = eTilesRef.current[count + casterYPos];
-            currentTileRef.current.style.backgroundColor = "darkred";
+            currentTile = eTilesRef.current[count + casterYPos];
+            currentTile.style.backgroundColor = "darkred";
             count++;
             totalAnimationTime -= animationInterval;
             
             if (totalAnimationTime <= 0) {
                 setTimeout(() => {
-                    currentTileRef.current.style.backgroundColor = "";
+                    currentTile.style.backgroundColor = "";
                 }, animationInterval);
                 clearInterval(i);
             }
