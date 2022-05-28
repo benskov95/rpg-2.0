@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import AbilityGrid from "./AbilityGrid";
 import "./css/Battle.css";
 import GameGrid from "./GameGrid";
@@ -14,6 +15,7 @@ export default function Battle() {
     const eTilesRef = useRef([]);
     const pTilesRef = useRef([]);
     const enemyPosRef = useRef(pLogic.initialPos);
+    const navigate = useNavigate();
 
     useEffect(() => {
         enemyPosRef.current = enemyPosition;
@@ -27,8 +29,13 @@ export default function Battle() {
         }, 1000);
     }
 
+    const goBack = () => {
+        navigate("/");
+    }
+
     return (
         <div id="container">
+
             <GameGrid 
             playerPosition={playerPosition} 
             pTilesRef={pTilesRef}
@@ -37,6 +44,7 @@ export default function Battle() {
             
             <AbilityGrid hotbar={keybinds.hotbar} abilities={abilities} />
 
+            <button onClick={goBack} style={{margin:"30px 0px 0px 15px", float: "left"}}>Back</button>
             <KeyboardEventHandler
             keybinds={keybinds}
             setKeybinds={setKeybinds}
