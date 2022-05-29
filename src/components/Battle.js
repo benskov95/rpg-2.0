@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AbilityGrid from "./AbilityGrid";
-import "./css/Battle.css";
 import GameGrid from "./GameGrid";
 import cLogic from "./logic/combatLogic";
 import pLogic from "./logic/positionLogic";
 import KeyboardEventHandler from "./utility/KeyboardEventHandler";
+import "./css/Battle.css";
 
 export default function Battle() {
     const [playerPosition, setPlayerPosition] = useState(pLogic.initialPos);
@@ -45,6 +45,7 @@ export default function Battle() {
             <AbilityGrid hotbar={keybinds.hotbar} abilities={abilities} />
 
             <button onClick={goBack} style={{margin:"30px 0px 0px 15px", float: "left"}}>Back</button>
+            
             <KeyboardEventHandler
             keybinds={keybinds}
             setKeybinds={setKeybinds}
