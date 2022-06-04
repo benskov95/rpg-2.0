@@ -2,7 +2,7 @@ import { keybindConverter } from "./utility/keyConverter"
 
 export default function AbilityGrid(props) {
     return (
-        <div id="ability-grid">
+        <div id={props.combatDisplay ? "c-ability-grid" : "e-ability-grid"}>
             {props.hotbar.map(btn => {
                 let ability = props.abilities.find(ab => ab.id === btn.abilityId);
                 return (
