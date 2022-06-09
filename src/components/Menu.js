@@ -9,20 +9,20 @@ export default function Menu() {
     }
 
     const goToEquipment = () => {
-        navigate("/equipment")
+        navigate("/equipment");
     }
 
     return (
         <div id="m-container">
-            <div id="battle-section" onClick={goToBattle}>
-                <p className="section-text">Battle</p>
+            <div className="battle-section" onClick={goToBattle}>
+                <span className="section-text">Battle</span>
             </div>
             <div id="flex-sections">
                 <div id="equipment-section" onClick={goToEquipment}>
-                    <p className="section-text">Equipment &amp; Loadout</p>
+                    <span className="section-text">Equipment &amp; Loadout</span>
                 </div>
                 <div id="shop-section">
-                    <p className="section-text">Shop</p>
+                    <span className="section-text">Shop</span>
                 </div>
             </div>
         </div>

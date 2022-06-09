@@ -6,9 +6,11 @@
 .section-text {
     margin-top: 20vh;
     font-size: 2rem;
+    display: inline-block;
+    position: relative;
 }
 
-#battle-section {
+.battle-section {
     height: 30vh;
     width: 98vw;
     max-width: 1400px;
@@ -18,7 +20,7 @@
     position: relative;
 }
 
-#battle-section::before {
+.battle-section::before {
     position: absolute;
     content: "";
     background-image: url("../utility/icons//menu/battle.jpg");
@@ -32,7 +34,7 @@
     transition: opacity 0.3s;
 }
 
-#battle-section:hover::before {
+.battle-section:hover::before {
     opacity: 0.3;
 }
 
@@ -54,7 +56,7 @@
 #equipment-section::before {
     position: absolute;
     content: "";
-    background-image: url("../utility/icons//menu/equipment.jpg");
+    background-image: url("../utility/icons/menu/equipment.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
