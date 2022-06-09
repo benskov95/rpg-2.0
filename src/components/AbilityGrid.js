@@ -1,4 +1,5 @@
-import { keybindConverter } from "./utility/keyConverter"
+import { keybindConverter } from "./utility/keyConverter";
+import "./css/AbilityGrid.css";
 
 export default function AbilityGrid(props) {
     return (

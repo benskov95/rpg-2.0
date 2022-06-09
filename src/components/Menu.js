@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import "./css/Menu.css";
 
 export default function Menu() {
     const navigate = useNavigate();
@@ -12,12 +13,18 @@ export default function Menu() {
     }
 
     return (
-        <div style={{marginTop: "25vh"}}>
-            <button onClick={goToBattle}>Battle</button>
-            <br />
-            <button onClick={goToEquipment}>Equipment &amp; loadout</button>
-            <br />
-            <button>Shop</button>
+        <div id="m-container">
+            <div id="battle-section" onClick={goToBattle}>
+                <p className="section-text">Battle</p>
+            </div>
+            <div id="flex-sections">
+                <div id="equipment-section" onClick={goToEquipment}>
+                    <p className="section-text">Equipment &amp; Loadout</p>
+                </div>
+                <div id="shop-section">
+                    <p className="section-text">Shop</p>
+                </div>
+            </div>
         </div>
     )
 }

@@ -1,0 +1,100 @@
+
+#m-container {
+    margin-top: 5vh;
+}
+
+.section-text {
+    margin-top: 20vh;
+    font-size: 2rem;
+}
+
+#battle-section {
+    height: 30vh;
+    width: 98vw;
+    max-width: 1400px;
+    margin: 0px auto 0.5rem auto;
+    border: 1px solid gray;
+    cursor: pointer;
+    position: relative;
+}
+
+#battle-section::before {
+    position: absolute;
+    content: "";
+    background-image: url("../utility/icons//menu/battle.jpg");
+    background-size: cover;
+    background-position: center;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 1;
+    transition: opacity 0.3s;
+}
+
+#battle-section:hover::before {
+    opacity: 0.3;
+}
+
+#flex-sections {
+    display: flex;
+    justify-content: center;
+}
+
+#equipment-section {
+    height: 30vh;
+    width: 50vw;
+    max-width: 695px;
+    margin: 0px 0.5rem 0px 0.5rem;
+    border: 1px solid gray;
+    cursor: pointer;
+    position: relative;
+}
+
+#equipment-section::before {
+    position: absolute;
+    content: "";
+    background-image: url("../utility/icons//menu/equipment.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 1;
+    transition: opacity 0.3s;
+}
+
+#equipment-section:hover::before {
+    opacity: 0.3;
+}
+
+#shop-section {
+    height: 30vh;
+    width: 50vw;
+    max-width: 695px;
+    margin-right: 0.5rem;
+    border: 1px solid gray;
+    cursor: pointer;
+    position: relative;
+}
+
+#shop-section::before {
+    position: absolute;
+    content: "";
+    background-image: url("../utility/icons//menu/shop.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 1;
+    transition: opacity 0.3s;
+}
+
+#shop-section:hover::before {
+    opacity: 0.3;
+}
