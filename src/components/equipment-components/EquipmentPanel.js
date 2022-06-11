@@ -1,4 +1,4 @@
-import iconConverter from "./utility/iconConverter";
+import iconConverter from "../utility/iconConverter";
 
 export default function EquipmentPanel() {
 
@@ -18,44 +18,6 @@ export default function EquipmentPanel() {
 
     return (
         <div id="equipment-box">
-            <ul id="equipment-list-r">
-                <li className="equipment-list-element" onMouseOver={showTooltip} onMouseLeave={hideTooltip}>
-                    <img className="equipment-list-element-img" src={iconConverter["gloves"]} alt="" />
-                    <div className="tooltip" hidden={true}>
-                        <p className="tooltip-name">Name</p>
-                        <p className="tooltip-description">+10 stam<br />+10 int</p>
-                    </div>
-                </li>
-                <li className="equipment-list-element" onMouseOver={showTooltip} onMouseLeave={hideTooltip}>
-                    <img className="equipment-list-element-img" src={iconConverter["legs"]} alt="" />
-                    <div className="tooltip" hidden={true}>
-                        <p className="tooltip-name">Name</p>
-                        <p className="tooltip-description">+10 stam<br />+10 int</p>
-                    </div>
-                </li>
-                <li className="equipment-list-element" onMouseOver={showTooltip} onMouseLeave={hideTooltip}>
-                    <img className="equipment-list-element-img" src={iconConverter["boots"]} alt="" />
-                    <div className="tooltip" hidden={true}>
-                        <p className="tooltip-name">Name</p>
-                        <p className="tooltip-description">+10 stam<br />+10 int</p>
-                    </div>
-                </li>
-                <li className="equipment-list-element" onMouseOver={showTooltip} onMouseLeave={hideTooltip}>
-                    <img className="equipment-list-element-img" src={iconConverter["ring"]} alt="" />
-                    <div className="tooltip" hidden={true}>
-                        <p className="tooltip-name">Name</p>
-                        <p className="tooltip-description">+10 stam<br />+10 int</p>
-                    </div>
-                </li>
-                <li className="equipment-list-element" onMouseOver={showTooltip} onMouseLeave={hideTooltip}>
-                    <img className="equipment-list-element-img" src={iconConverter["ring"]} alt="" />
-                    <div className="tooltip" hidden={true}>
-                        <p className="tooltip-name">Name</p>
-                        <p className="tooltip-description">+10 stam<br />+10 int</p>
-                    </div>
-                </li>
-            </ul>
-
             <ul id="equipment-list-l">
                 <li className="equipment-list-element" onMouseOver={showTooltip} onMouseLeave={hideTooltip}>
                     <img className="equipment-list-element-img" src={iconConverter["helmet"]} alt="" />
@@ -101,6 +63,46 @@ export default function EquipmentPanel() {
                     <p className="tooltip-description">+10 stam<br />+10 int</p>
                 </div>
             </div>
+
+
+            <ul id="equipment-list-r">
+                <li className="equipment-list-element" onMouseOver={showTooltip} onMouseLeave={hideTooltip}>
+                    <img className="equipment-list-element-img" src={iconConverter["gloves"]} alt="" />
+                    <div className="tooltip" hidden={true}>
+                        <p className="tooltip-name">Name</p>
+                        <p className="tooltip-description">+10 stam<br />+10 int</p>
+                    </div>
+                </li>
+                <li className="equipment-list-element" onMouseOver={showTooltip} onMouseLeave={hideTooltip}>
+                    <img className="equipment-list-element-img" src={iconConverter["legs"]} alt="" />
+                    <div className="tooltip" hidden={true}>
+                        <p className="tooltip-name">Name</p>
+                        <p className="tooltip-description">+10 stam<br />+10 int</p>
+                    </div>
+                </li>
+                <li className="equipment-list-element" onMouseOver={showTooltip} onMouseLeave={hideTooltip}>
+                    <img className="equipment-list-element-img" src={iconConverter["boots"]} alt="" />
+                    <div className="tooltip" hidden={true}>
+                        <p className="tooltip-name">Name</p>
+                        <p className="tooltip-description">+10 stam<br />+10 int</p>
+                    </div>
+                </li>
+                <li className="equipment-list-element" onMouseOver={showTooltip} onMouseLeave={hideTooltip}>
+                    <img className="equipment-list-element-img" src={iconConverter["ring"]} alt="" />
+                    <div className="tooltip" hidden={true}>
+                        <p className="tooltip-name">Name</p>
+                        <p className="tooltip-description">+10 stam<br />+10 int</p>
+                    </div>
+                </li>
+                <li className="equipment-list-element" onMouseOver={showTooltip} onMouseLeave={hideTooltip}>
+                    <img className="equipment-list-element-img" src={iconConverter["ring"]} alt="" />
+                    <div className="tooltip" hidden={true}>
+                        <p className="tooltip-name">Name</p>
+                        <p className="tooltip-description">+10 stam<br />+10 int</p>
+                    </div>
+                </li>
+            </ul>
+
         </div>
     )
 }

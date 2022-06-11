@@ -1,4 +1,4 @@
-import pLogic from "./logic/positionLogic";
+import pLogic from "../logic/positionLogic";
 
 export default function GameGrid(props) {
     return (

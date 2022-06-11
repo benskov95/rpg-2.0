@@ -1,13 +1,13 @@
 import "./css/Equipment.css"
-import EquipmentPanel from "./EquipmentPanel";
-import Inventory from "./Inventory";
-import AbilityList from "./AbilityList";
-import EquipmentHandler from "./EquipmentHandler";
+import EquipmentPanel from "./equipment-components/EquipmentPanel";
+import Inventory from "./reusable-components/Inventory";
+import AbilityList from "./equipment-components/AbilityList";
+import EquipmentHandler from "./equipment-components/EquipmentHandler";
 
 export default function Equipment(props) {
 
     return (
-        <div id="e-container" style={{position: "relative"}}>
+        <div id="e-container">
             <EquipmentPanel />
             <Inventory />
             <EquipmentHandler />

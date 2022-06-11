@@ -1,4 +1,4 @@
-import iconConverter from "./utility/iconConverter";
+import iconConverter from "../utility/iconConverter";
 
 export default function Inventory() {
     return (

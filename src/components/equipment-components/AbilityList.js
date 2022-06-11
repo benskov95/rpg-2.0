@@ -1,4 +1,4 @@
-import AbilityGrid from "./AbilityGrid";
+import AbilityGrid from "../reusable-components/AbilityGrid";
 
 export default function AbilityList(props) {
     return (

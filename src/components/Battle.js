@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import AbilityGrid from "./AbilityGrid";
-import GameGrid from "./GameGrid";
+import AbilityGrid from "./reusable-components/AbilityGrid";
+import GameGrid from "./battle-components/GameGrid";
 import cLogic from "./logic/combatLogic";
 import pLogic from "./logic/positionLogic";
 import KeyboardEventHandler from "./utility/KeyboardEventHandler";
