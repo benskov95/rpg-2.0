@@ -6,11 +6,26 @@
 }
 
 #equipment-box {
+    position: relative;
     display: flex;
     width: 40%;
     max-width: 500px;
     margin: 3% 0px 0px 9%;
     border: 1px solid gray;
+}
+
+#equipment-box::before {
+    position: absolute;
+    content: "";
+    background-image: url("../utility/icons/classes/wizard/wizard.jpg");
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+    top: 0; 
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0.4; 
 }
 
 #equipment-list-r {
@@ -70,15 +85,21 @@
 }
 
 .tooltip {
-    background-color: gray;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid gray;
+    border-radius: 5px;
     position: absolute;
     pointer-events: none;
     margin-left: 5vw;
+    min-width: 80px;
     max-width: 250px;
+    z-index: 1;
 }
 
 #weapon-tooltip {
-    background-color: gray;
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 1px solid gray;
+    border-radius: 5px;
     position: absolute;
     pointer-events: none;
     margin: -4vw 0px 0px 6vw; 

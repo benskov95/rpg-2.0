@@ -1,7 +1,6 @@
 
 #c-ability-grid {
-    margin: 1vh 0px 0px 7vw;
-    float: left;
+    margin-top: 1vh;
     display: grid;
     padding: 3px;
     grid-gap: 5px;
@@ -38,7 +37,7 @@
 .ability-bind {
     position: absolute;
     width: 2%;
-    margin: 0px 0px 0px 1.2vw;
+    margin: 2px 0px 0px 1.2vw;
     font-size: 0.7vw;
     font-style: bold;
 }
@@ -46,6 +45,6 @@
 .ability-cd-text {
     position: absolute;
     width: 2%;
-    margin: 0.8vw 0px 0px 0.4vw;
+    margin: 1vw 0px 0px 0.4vw;
     font-size: 0.9vw;
 }

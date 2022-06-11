@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react"
+import cLogic from "../logic/combatLogic";
+import pLogic from "../logic/positionLogic";
 import { shiftKeyConverter } from "./keyConverter";
 
 export default function KeyboardEventHandler(props) {
@@ -48,7 +50,7 @@ export default function KeyboardEventHandler(props) {
                 || (altDown && btn.keybind.includes("alt") 
                 && btn.keybind.includes(key))) {
 
-                props.abilityFunc
+                cLogic.startAbilityCd
                 (
                     btn,
                     props.keybinds,
@@ -58,8 +60,8 @@ export default function KeyboardEventHandler(props) {
                     props.abilityFuncArgs[2]
                 );
             } else {
-                if (btn.keybind === key) {
-                    props.abilityFunc
+                if (btn.keybind === key && !shiftDown && !altDown) {
+                    cLogic.startAbilityCd
                     (
                         btn, 
                         props.keybinds,
@@ -75,7 +77,7 @@ export default function KeyboardEventHandler(props) {
 
         for (const keybind in props.keybinds.movement) {
             if (key === props.keybinds.movement[keybind]) {
-                props.movementFunc
+                pLogic.handlePlayerMovement
                 (
                     keybind, 
                     props.movementFuncArgs[0], 

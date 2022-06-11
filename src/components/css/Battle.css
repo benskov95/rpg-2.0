@@ -7,16 +7,16 @@
 
 .game-grid {
     width: 34.5vw;
-    float: left;
-    margin: 20vh 0px 0px 7vw;
+    margin: 20vh 0px 0px 0vw;
     display: grid;
     padding: 3px;
     grid-gap: 5px;
-    grid-template-columns: repeat(3, 11vw);
+    grid-template-columns: repeat(8, 11vw);
 }
 
 .tile {
     background-color: #444;
+    border: 1px solid black;
     height: 11vh;
     border-radius: 5px;
 }

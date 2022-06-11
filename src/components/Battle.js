@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AbilityGrid from "./reusable-components/AbilityGrid";
 import GameGrid from "./battle-components/GameGrid";
-import cLogic from "./logic/combatLogic";
 import pLogic from "./logic/positionLogic";
 import KeyboardEventHandler from "./utility/KeyboardEventHandler";
 import "./css/Battle.css";
@@ -10,8 +9,7 @@ import "./css/Battle.css";
 export default function Battle(props) {
     const [playerPosition, setPlayerPosition] = useState(pLogic.initialPos);
     const [enemyPosition, setEnemyPosition] = useState(pLogic.initialPos);
-    const eTilesRef = useRef([]);
-    const pTilesRef = useRef([]);
+    const tilesRef = useRef([]);
     const enemyPosRef = useRef(pLogic.initialPos);
     const navigate = useNavigate();
 
@@ -36,9 +34,8 @@ export default function Battle(props) {
 
             <GameGrid 
             playerPosition={playerPosition} 
-            pTilesRef={pTilesRef}
-            ePosition={enemyPosition}
-            eTilesRef={eTilesRef} />
+            tilesRef={tilesRef}
+            ePosition={enemyPosition} />
             
             <AbilityGrid combatDisplay={true} hotbar={props.keybinds.hotbar} abilities={props.abilities} />
 
@@ -47,10 +44,8 @@ export default function Battle(props) {
             <KeyboardEventHandler
             keybinds={props.keybinds}
             setKeybinds={props.setKeybinds}
-            movementFunc={pLogic.handlePlayerMovement}
             movementFuncArgs={[playerPosition, setPlayerPosition]} 
-            abilityFunc={cLogic.startAbilityCd}
-            abilityFuncArgs={[props.abilities, eTilesRef, playerPosition]} />
+            abilityFuncArgs={[props.abilities, tilesRef, playerPosition]} />
         </div>
     )
 }

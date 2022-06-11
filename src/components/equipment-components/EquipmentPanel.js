@@ -102,7 +102,6 @@ export default function EquipmentPanel() {
                     </div>
                 </li>
             </ul>
-
         </div>
     )
 }

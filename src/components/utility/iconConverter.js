@@ -10,6 +10,9 @@ import necklace from "./icons/gear/necklace.png";
 import potion from "./icons/items/potion.png";
 import ring from "./icons/gear/ring.png";
 import weapon from "./icons/gear/weapon.png"
+import wizard from "./icons/classes/wizard/wizard.jpg";
+import fireball from "./icons/classes/wizard/fireball.png";
+import frostbolt from "./icons/classes/wizard/frostbolt.png";
 
 const iconConverter = {
     "bag": bag,
@@ -23,7 +26,10 @@ const iconConverter = {
     "necklace": necklace,
     "potion": potion,
     "ring": ring,
-    "weapon": weapon
+    "weapon": weapon,
+    "wizard": wizard,
+    "fireball": fireball,
+    "frostbolt": frostbolt
 }
 
 export default iconConverter;

@@ -1,7 +1,13 @@
 
 const positionLogic = () => {
-    const battleGrid = [[0, 1, 2], [3, 4, 5], [6, 7, 8]];
     const initialPos = {x: 1, y: 1};
+    const battleGrid = 
+    [
+        Array.from({length: 8}, (_, i) => i), 
+        Array.from({length: 8}, (_, i) => i + 8), 
+        Array.from({length: 8}, (_, i) => i + 16), 
+        Array.from({length: 8}, (_, i) => i + 24)
+    ];
 
     const handlePlayerMovement = (key, playerPosition, setPlayerPosition) => {
         let newPos = {...playerPosition};
@@ -20,7 +26,7 @@ const positionLogic = () => {
                 }
                 break;
             case "down":
-                if (playerPosition.y < (battleGrid[0].length - 1)) {
+                if (playerPosition.y < (battleGrid.length - 1)) {
                     newPos.y += 1;
                     setPlayerPosition(newPos);
                 }
@@ -48,7 +54,7 @@ const positionLogic = () => {
             posList.push(battleGrid[pos.y][pos.x - 1]);
         }
         
-        if (pos.y < (battleGrid[0].length - 1)) {
+        if (pos.y < (battleGrid.length - 1)) {
             posList.push(battleGrid[pos.y + 1][pos.x]);
         }
 
