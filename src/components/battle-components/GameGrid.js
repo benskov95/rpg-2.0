@@ -18,6 +18,9 @@ export default function GameGrid(props) {
                                     {tile === pLogic.battleGrid[props.playerPosition.y][props.playerPosition.x] &&
                                         <img className="participant-img" src={iconConverter["wizard"]} alt="" /> 
                                     }
+                                    {tile === pLogic.battleGrid[props.enemyPosition.y][props.enemyPosition.x] && 
+                                        <img className="participant-img" src={iconConverter["wizard"]} alt="" /> 
+                                    }
                                 </div>
                             )
                         }))

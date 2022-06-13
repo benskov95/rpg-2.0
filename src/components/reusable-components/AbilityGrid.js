@@ -12,19 +12,19 @@ export default function AbilityGrid(props) {
                         <>
                             <p className="ability-bind">{keybindConverter(btn.keybind)}</p>
                             <p className="ability-cd-text">{btn.cdText}</p>
-                            <img 
-                            className="ability-img"
-                            style={{opacity: btn.opacity}}
-                            name={btn.name}
-                            src={ability.image} 
-                            alt="" />
+                            {ability.image !== "" &&
+                                <img 
+                                className="ability-img"
+                                style={{opacity: btn.opacity}}
+                                name={btn.name}
+                                src={ability.image} 
+                                alt="" />
+                            }
                         </>
                         }
                     </div>
                 )
             })}
-            <div className="ability">
-            </div>
             <div className="ability">
             </div>
             <div className="ability">

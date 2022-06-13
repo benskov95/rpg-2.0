@@ -7,8 +7,9 @@ import { useState } from "react";
 import iconConverter from "./components/utility/iconConverter";
 
 export default function App() {
-  const [keybinds, setKeybinds] = useState({movement: {up: "ArrowUp", right: "ArrowRight", down: "ArrowDown", left: "ArrowLeft"}, hotbar: [{name: "btn1", abilityId: 1, keybind: "1", opacity: 1, cdText: ""}, {name: "btn2", abilityId: 2, keybind: "alt+2", opacity: 1, cdText: ""}]});
-  const [abilities, setAbilities] = useState([{id: 1, pattern: [{x: 0, y: 0}, {x: 1, y: 0}, {x: 2, y: 0}], startOnPlayerPos: false, element: "fire", name: "test1", image: iconConverter["fireball"], cooldown: 2000, animation: {animationTime: 1500, animationInterval: 500}}, {id: 2, pattern: [[{x: 0, y: 0}, {x: 0, y: 1}, {x: 0, y: 2}]], startOnPlayerPos: false, element: "frost", name: "test2", image: iconConverter["frostbolt"], cooldown: 8000, animation: {animationTime: 500, animationInterval: 100}}])
+  // change to only shift modifier - alt + left arrow navigates to last page
+  const [keybinds, setKeybinds] = useState({movement: {up: "ArrowUp", right: "ArrowRight", down: "ArrowDown", left: "ArrowLeft"}, hotbar: [{name: "btn1", abilityId: "fireball", keybind: "1", opacity: 1, cdText: ""}, {name: "btn2", abilityId: "frostbolt", keybind: "alt+2", opacity: 1, cdText: ""}, {name: "btn3", abilityId: "wallOfIce", keybind: "3", opacity: 1, cdText: ""}]});
+  const [abilities, setAbilities] = useState([{id: "fireball", image: iconConverter["fireball"], cooldown: 2000}, {id: "frostbolt", image: iconConverter["frostbolt"], cooldown: 8000}, {id: "wallOfIce", image: iconConverter["wallOfIce"], cooldown: 30000}])
 
   return (
       <BrowserRouter>

@@ -13,23 +13,25 @@ import weapon from "./icons/gear/weapon.png"
 import wizard from "./icons/classes/wizard/wizard.jpg";
 import fireball from "./icons/classes/wizard/fireball.png";
 import frostbolt from "./icons/classes/wizard/frostbolt.png";
+import wallOfIce from "./icons/classes/wizard/wallOfIce.jpg";
 
 const iconConverter = {
-    "bag": bag,
-    "boots": boots,
-    "bracers": bracers,
-    "chest": chest,
-    "cloak":  cloak,
-    "gloves": gloves,
-    "helmet": helmet,
-    "legs": legs,
-    "necklace": necklace,
-    "potion": potion,
-    "ring": ring,
-    "weapon": weapon,
-    "wizard": wizard,
-    "fireball": fireball,
-    "frostbolt": frostbolt
+    bag: bag,
+    boots: boots,
+    bracers: bracers,
+    chest: chest,
+    cloak:  cloak,
+    gloves: gloves,
+    helmet: helmet,
+    legs: legs,
+    necklace: necklace,
+    potion: potion,
+    ring: ring,
+    weapon: weapon,
+    wizard: wizard,
+    fireball: fireball,
+    frostbolt: frostbolt,
+    wallOfIce: wallOfIce
 }
 
 export default iconConverter;

@@ -7,8 +7,8 @@ import KeyboardEventHandler from "./utility/KeyboardEventHandler";
 import "./css/Battle.css";
 
 export default function Battle(props) {
-    const [playerPosition, setPlayerPosition] = useState(pLogic.initialPos);
-    const [enemyPosition, setEnemyPosition] = useState(pLogic.initialPos);
+    const [playerPosition, setPlayerPosition] = useState(pLogic.pInitialPos);
+    const [enemyPosition, setEnemyPosition] = useState(pLogic.eInitialPos);
     const tilesRef = useRef([]);
     const enemyPosRef = useRef(pLogic.initialPos);
     const navigate = useNavigate();
@@ -33,9 +33,9 @@ export default function Battle(props) {
         <div id="b-container">
 
             <GameGrid 
-            playerPosition={playerPosition} 
-            tilesRef={tilesRef}
-            ePosition={enemyPosition} />
+            playerPosition={playerPosition}
+            enemyPosition={enemyPosition} 
+            tilesRef={tilesRef} />
             
             <AbilityGrid combatDisplay={true} hotbar={props.keybinds.hotbar} abilities={props.abilities} />
 

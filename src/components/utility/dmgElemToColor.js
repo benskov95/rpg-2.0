@@ -1,7 +1,7 @@
 
 const colorConverter = {
-    "fire": "red",
-    "frost": "lightblue"
+    fire: "red",
+    frost: "lightblue"
 }
 
 export default colorConverter;
