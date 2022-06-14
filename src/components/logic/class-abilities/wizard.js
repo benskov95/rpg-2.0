@@ -5,8 +5,8 @@ const wizardAbilities = () => {
 
     const fireball = (playerPosition, tilesRef) => {
         const animationIntervalMs = 500;
+        const element = "fire";
         let animationTimeMs = 1500;
-        let element = "fire";
         let count = 1; // start in front of player, not on top of.
         let currentTile;
 
@@ -41,8 +41,8 @@ const wizardAbilities = () => {
     const frostbolt = (playerPosition, tilesRef) => {
         // debuff if hit - -20% resistance to fire
         const animationIntervalMs = 250;
+        const element = "frost";
         let animationTimeMs = 1000;
-        let element = "frost";
         let count = 1; 
         let currentTile;
 
@@ -76,8 +76,8 @@ const wizardAbilities = () => {
 
     const wallOfIce = (playerPosition, tilesRef) => {
         const animationTimeMs = 8000;
-        let element = "frost";
-        let secondTile = playerPosition.y === 0 ? 1 : playerPosition.y - 1; 
+        const element = "frost";
+        const secondTile = playerPosition.y === 0 ? 1 : playerPosition.y - 1; 
         let usedTiles = [];
 
         for (let tile of tilesRef.current) {

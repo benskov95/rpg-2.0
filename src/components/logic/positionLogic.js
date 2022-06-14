@@ -98,9 +98,9 @@ const positionLogic = () => {
 
     const clearBlockedTiles = (usedTiles) => {
         let newList = [...blockedTiles];
-        usedTiles.forEach(thing => {
-            let test = newList.findIndex(tile => tile.id === thing.id);
-            newList.splice(test, 1);
+        usedTiles.forEach(usedTile => {
+            let blockedTile = newList.findIndex(tile => tile.id === usedTile.id);
+            newList.splice(blockedTile, 1);
         })
         blockedTiles = newList;
     }
