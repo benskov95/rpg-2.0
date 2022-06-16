@@ -2,7 +2,6 @@
 const positionLogic = () => {
     const pInitialPos = {x: 1, y: 1};
     const eInitialPos = {x: 6, y: 1};
-    let blockedTiles = [];
     const battleGrid = 
     [
         Array.from({length: 8}, (_, i) => i), 
@@ -10,6 +9,7 @@ const positionLogic = () => {
         Array.from({length: 8}, (_, i) => i + 16), 
         Array.from({length: 8}, (_, i) => i + 24)
     ];
+    let blockedCells = [];
 
     
     const handlePlayerMovement = (key, playerPosition, setPlayerPosition) => {
@@ -72,7 +72,7 @@ const positionLogic = () => {
         return posList;
     }
     
-    const findCoordinatesForPos = (selectedTile, setEnemyPosition) => {
+    const findCoordinatesForPos = (selectedCell, setEnemyPosition) => {
         let yCount = 0;
         let newPos;
 
@@ -83,8 +83,8 @@ const positionLogic = () => {
                 break;
             }
 
-            for (let tile of row) {
-                if (tile === selectedTile) {
+            for (let cell of row) {
+                if (cell === selectedCell) {
                     let newPos = {x: xCount, y: yCount};
                     setEnemyPosition(newPos);
                     break;
@@ -96,21 +96,21 @@ const positionLogic = () => {
         }
     }
 
-    const clearBlockedTiles = (usedTiles) => {
-        let newList = [...blockedTiles];
-        usedTiles.forEach(usedTile => {
-            let blockedTile = newList.findIndex(tile => tile.id === usedTile.id);
-            newList.splice(blockedTile, 1);
+    const clearBlockedCells = (usedCells) => {
+        let newList = [...blockedCells];
+        usedCells.forEach(usedCell => {
+            let blockedCell = newList.findIndex(cell => cell.id === usedCell.id);
+            newList.splice(blockedCell, 1);
         })
-        blockedTiles = newList;
+        blockedCells = newList;
     }
             
     const confirmNewPosValidity = (newPos) => {
-        if (blockedTiles.length > 0) {
-            for (let tile of blockedTiles) {
-                let tileCoords = JSON.parse(tile.id);
-                if (tileCoords.x === newPos.x &&
-                    tileCoords.y === newPos.y) {
+        if (blockedCells.length > 0) {
+            for (let cell of blockedCells) {
+                let cellCoords = JSON.parse(cell.id);
+                if (cellCoords.x === newPos.x &&
+                    cellCoords.y === newPos.y) {
                         return false;
                 }
             }
@@ -122,10 +122,10 @@ const positionLogic = () => {
         handlePlayerMovement,
         findAvailablePositions,
         findCoordinatesForPos,
-        clearBlockedTiles,
+        clearBlockedCells,
         pInitialPos,
         eInitialPos,
-        blockedTiles,
+        blockedCells,
         battleGrid
     }
 }

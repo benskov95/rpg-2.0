@@ -3,34 +3,34 @@ import pLogic from "../positionLogic";
 
 const wizardAbilities = () => {
 
-    const fireball = (playerPosition, tilesRef) => {
+    const fireball = (playerPosition, cellsref) => {
         const animationIntervalMs = 500;
         const element = "fire";
         let animationTimeMs = 1500;
         let count = 1; // start in front of player, not on top of.
-        let currentTile;
+        let currentCell;
 
         const i = setInterval(() => {
-            if (currentTile !== undefined) {
-                currentTile.style.backgroundColor = "";
+            if (currentCell !== undefined) {
+                currentCell.style.backgroundColor = "";
             }
             
-            currentTile = tilesRef.current.find(tile => {
-                let tileCoords = JSON.parse(tile.id);
-                if (tileCoords.x === (playerPosition.x + count) && 
-                    tileCoords.y === playerPosition.y) {
-                        return tile;
+            currentCell = cellsref.current.find(cell => {
+                let cellCoords = JSON.parse(cell.id);
+                if (cellCoords.x === (playerPosition.x + count) && 
+                    cellCoords.y === playerPosition.y) {
+                        return cell;
                 }
                 return 0;
             });
-            currentTile.style.backgroundColor = colorConverter[element];
+            currentCell.style.backgroundColor = colorConverter[element];
             count++;
 
             animationTimeMs -= animationIntervalMs;
 
             if (animationTimeMs <= 0) {
                 setTimeout(() => {
-                    currentTile.style.backgroundColor = "";
+                    currentCell.style.backgroundColor = "";
                 }, animationIntervalMs);
 
                 clearInterval(i);
@@ -38,35 +38,35 @@ const wizardAbilities = () => {
         }, animationIntervalMs);
     }
 
-    const frostbolt = (playerPosition, tilesRef) => {
+    const frostbolt = (playerPosition, cellsRef) => {
         // debuff if hit - -20% resistance to fire
         const animationIntervalMs = 250;
         const element = "frost";
         let animationTimeMs = 1000;
         let count = 1; 
-        let currentTile;
+        let currentCell;
 
         const i = setInterval(() => {
-            if (currentTile !== undefined) {
-                currentTile.style.backgroundColor = "";
+            if (currentCell !== undefined) {
+                currentCell.style.backgroundColor = "";
             }
             
-            currentTile = tilesRef.current.find(tile => {
-                let tileCoords = JSON.parse(tile.id);
-                if (tileCoords.x === (playerPosition.x + count) && 
-                    tileCoords.y === playerPosition.y) {
-                        return tile;
+            currentCell = cellsRef.current.find(cell => {
+                let cellCoords = JSON.parse(cell.id);
+                if (cellCoords.x === (playerPosition.x + count) && 
+                    cellCoords.y === playerPosition.y) {
+                        return cell;
                 }
                 return 0;
             });
-            currentTile.style.backgroundColor = colorConverter[element];
+            currentCell.style.backgroundColor = colorConverter[element];
             count++;
 
             animationTimeMs -= animationIntervalMs;
 
             if (animationTimeMs <= 0) {
                 setTimeout(() => {
-                    currentTile.style.backgroundColor = "";
+                    currentCell.style.backgroundColor = "";
                 }, animationIntervalMs);
 
                 clearInterval(i);
@@ -74,38 +74,38 @@ const wizardAbilities = () => {
         }, animationIntervalMs);
     }
 
-    const wallOfIce = (playerPosition, tilesRef) => {
+    const wallOfIce = (playerPosition, cellsRef) => {
         const animationTimeMs = 8000;
         const element = "frost";
-        const secondTile = playerPosition.y === 0 ? 1 : playerPosition.y - 1; 
-        let usedTiles = [];
+        const secondCell = playerPosition.y === 0 ? 1 : playerPosition.y - 1; 
+        let usedCells = [];
 
-        for (let tile of tilesRef.current) {
-            let tileCoords = JSON.parse(tile.id);
+        for (let cell of cellsRef.current) {
+            let cellCoords = JSON.parse(cell.id);
     
-            if (usedTiles.length === 2) {
+            if (usedCells.length === 2) {
                 break;
             }
 
-            if (tileCoords.x === (playerPosition.x + 1) &&
-                tileCoords.y === playerPosition.y) {
-                    usedTiles.push(tile);
+            if (cellCoords.x === (playerPosition.x + 1) &&
+                cellCoords.y === playerPosition.y) {
+                    usedCells.push(cell);
             }
-            if (tileCoords.x === (playerPosition.x + 1) &&
-                tileCoords.y === secondTile) {
-                    usedTiles.push(tile);
+            if (cellCoords.x === (playerPosition.x + 1) &&
+                cellCoords.y === secondCell) {
+                    usedCells.push(cell);
             }
         }
 
-        usedTiles.forEach(tile => {
-            tile.style.backgroundColor = colorConverter[element];
-            pLogic.blockedTiles.push(tile);
+        usedCells.forEach(cell => {
+            cell.style.backgroundColor = colorConverter[element];
+            pLogic.blockedCells.push(cell);
         })
 
         setTimeout(() => {
-            pLogic.clearBlockedTiles(usedTiles);
-            usedTiles.forEach(tile => {
-                tile.style.backgroundColor = "";
+            pLogic.clearBlockedCells(usedCells);
+            usedCells.forEach(cell => {
+                cell.style.backgroundColor = "";
             })
         }, animationTimeMs);
     }

@@ -9,7 +9,7 @@ import "./css/Battle.css";
 export default function Battle(props) {
     const [playerPosition, setPlayerPosition] = useState(pLogic.pInitialPos);
     const [enemyPosition, setEnemyPosition] = useState(pLogic.eInitialPos);
-    const tilesRef = useRef([]);
+    const cellsRef = useRef([]);
     const enemyPosRef = useRef(pLogic.initialPos);
     const navigate = useNavigate();
 
@@ -35,7 +35,7 @@ export default function Battle(props) {
             <GameGrid 
             playerPosition={playerPosition}
             enemyPosition={enemyPosition} 
-            tilesRef={tilesRef} />
+            cellsRef={cellsRef} />
             
             <AbilityGrid combatDisplay={true} hotbar={props.keybinds.hotbar} abilities={props.abilities} />
 
@@ -45,7 +45,7 @@ export default function Battle(props) {
             keybinds={props.keybinds}
             setKeybinds={props.setKeybinds}
             movementFuncArgs={[playerPosition, setPlayerPosition]} 
-            abilityFuncArgs={[props.abilities, tilesRef, playerPosition]} />
+            abilityFuncArgs={[props.abilities, cellsRef, playerPosition]} />
         </div>
     )
 }
