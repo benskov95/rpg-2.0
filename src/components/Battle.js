@@ -26,7 +26,7 @@ export default function Battle(props) {
     }
 
     const goBack = () => {
-        navigate("/");
+        navigate("/rpg");
     }
 
     return (

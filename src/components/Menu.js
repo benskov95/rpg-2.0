@@ -5,11 +5,11 @@ export default function Menu() {
     const navigate = useNavigate();
 
     const goToBattle = () => {
-        navigate("/battle");
+        navigate("/rpg/battle");
     }
 
     const goToEquipment = () => {
-        navigate("/equipment");
+        navigate("/rpg/equipment");
     }
 
     return (

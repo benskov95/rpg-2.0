@@ -15,16 +15,16 @@ export default function App() {
       <BrowserRouter>
 
         <Routes>
-          <Route path="/" element={<Menu />} />
+          <Route path="/rpg" element={<Menu />} />
 
-          <Route path="/battle" element={
+          <Route path="/rpg/battle" element={
           <Battle 
           keybinds={keybinds} 
           setKeybinds={setKeybinds} 
           abilities={abilities} />
           } />
 
-          <Route path="/equipment" element={
+          <Route path="/rpg/equipment" element={
           <Equipment 
           keybinds={keybinds} 
           setKeybinds={setKeybinds} 
