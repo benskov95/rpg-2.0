@@ -57,31 +57,31 @@ export default function Inventory() {
             <ul id="inventory-list">
                 <li className="inventory-list-element">
                     <img className="inventory-list-element-img" src="https://cdn4.iconfinder.com/data/icons/video-game-items-concepts/128/armor-bracers-2-512.png" alt="" />
-                    <p className="inventory-list-element-text">Gang weed</p>
+                    <p className="inventory-list-element-text">Some name</p>
                 </li>
                 <li className="inventory-list-element">
                     <img className="inventory-list-element-img" src="https://cdn4.iconfinder.com/data/icons/video-game-items-concepts/128/armor-bracers-2-512.png" alt="" />
-                    <p className="inventory-list-element-text">Gang weed</p>
+                    <p className="inventory-list-element-text">Some name</p>
                 </li>
                 <li className="inventory-list-element">
                     <img className="inventory-list-element-img" src="https://cdn4.iconfinder.com/data/icons/video-game-items-concepts/128/armor-bracers-2-512.png" alt="" />
-                    <p className="inventory-list-element-text">Gang weed</p>
+                    <p className="inventory-list-element-text">Some name</p>
                 </li>
                 <li className="inventory-list-element">
                     <img className="inventory-list-element-img" src="https://cdn4.iconfinder.com/data/icons/video-game-items-concepts/128/armor-bracers-2-512.png" alt="" />
-                    <p className="inventory-list-element-text">Gang weed</p>
+                    <p className="inventory-list-element-text">Some name</p>
                 </li>
                 <li className="inventory-list-element">
                     <img className="inventory-list-element-img" src="https://cdn4.iconfinder.com/data/icons/video-game-items-concepts/128/armor-bracers-2-512.png" alt="" />
-                    <p className="inventory-list-element-text">Gang weed</p>
+                    <p className="inventory-list-element-text">Some name</p>
                 </li>
                 <li className="inventory-list-element">
                     <img className="inventory-list-element-img" src="https://cdn4.iconfinder.com/data/icons/video-game-items-concepts/128/armor-bracers-2-512.png" alt="" />
-                    <p className="inventory-list-element-text">Gang weed</p>
+                    <p className="inventory-list-element-text">Some name</p>
                 </li>
                 <li className="inventory-list-element">
                     <img className="inventory-list-element-img" src="https://cdn4.iconfinder.com/data/icons/video-game-items-concepts/128/armor-bracers-2-512.png" alt="" />
-                    <p className="inventory-list-element-text">Gang weed</p>
+                    <p className="inventory-list-element-text">Some name</p>
                 </li>
             </ul>
         </div>
