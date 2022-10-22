@@ -1,9 +1,10 @@
 import colorConverter from "../../utility/dmgElemToColor";
 import pLogic from "../positionLogic";
+import cLogic from "../combatLogic";
 
 const wizardAbilities = () => {
 
-    const fireball = (playerPosition, cellsref) => {
+    const fireball = (playerPosition, currentEnemyPos, cellsref) => {
         const animationIntervalMs = 500;
         const element = "fire";
         let animationTimeMs = 1500;
@@ -26,6 +27,11 @@ const wizardAbilities = () => {
             currentCell.style.backgroundColor = colorConverter[element];
             count++;
 
+            if (currentEnemyPos.x === JSON.parse(currentCell.id).x 
+            && currentEnemyPos.y === JSON.parse(currentCell.id).y) {
+                cLogic.handleDamageCalculation({playerCharId: "Merlin", enemyId: "Imp", abilityId: "fireball"});
+            }
+
             animationTimeMs -= animationIntervalMs;
 
             if (animationTimeMs <= 0) {
@@ -38,7 +44,7 @@ const wizardAbilities = () => {
         }, animationIntervalMs);
     }
 
-    const frostbolt = (playerPosition, cellsRef) => {
+    const frostbolt = (playerPosition, currentEnemyPos, cellsRef) => {
         // debuff if hit - -20% resistance to fire
         const animationIntervalMs = 250;
         const element = "frost";
@@ -74,7 +80,7 @@ const wizardAbilities = () => {
         }, animationIntervalMs);
     }
 
-    const wallOfIce = (playerPosition, cellsRef) => {
+    const wallOfIce = (playerPosition, currentEnemyPos, cellsRef) => {
         const animationTimeMs = 8000;
         const element = "frost";
         const secondCell = playerPosition.y === 0 ? 1 : playerPosition.y - 1; 

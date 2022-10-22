@@ -1,17 +1,20 @@
 import classHandler from "./classHandler";
+import combatFacade from "../../facades/combatFacade";
 
 const combatLogic = () => {
     const abilitiesOnCd = [];
+    let currentEnemyPos = null;
+    let playerDmg = 0;
 
     const startAbilityCd = (btn, keybinds, setKeybinds, abilities, cellsRef, playerPosition) => {
-        const usedAbility = abilities.find(ab => ab.id === btn.abilityId);
         const updateInterval = 1000 / 60;
+        let usedAbility = abilities.find(ab => ab.id === btn.abilityId);
         let cd = usedAbility.cooldown - updateInterval;
 
         if (abilitiesOnCd.find(ab => ab.name === btn.name) === undefined) {
             btn.opacity = "0.2";
             beginAbilityAnimation(usedAbility, playerPosition, cellsRef);
-        } else {
+        } else { 
             return;
         }
 
@@ -38,14 +41,26 @@ const combatLogic = () => {
 
         for (const ability in playerClass) {
             if (ability === usedAbility.id) {
-                playerClass[ability](playerPosition, cellsRef);
+                playerClass[ability](playerPosition, currentEnemyPos, cellsRef);
                 break;
             }
         }
     }
 
+    const handleDamageCalculation = async (dmgEvent) => {
+        try {
+            const res = await combatFacade.calculatePlayerDamage(dmgEvent);
+            return res;
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
     return {
         startAbilityCd,
+        handleDamageCalculation,
+        currentEnemyPos,
+        playerDmg
     }
 }
 

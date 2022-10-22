@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import AbilityGrid from "./reusable-components/AbilityGrid";
 import GameGrid from "./battle-components/GameGrid";
 import pLogic from "./logic/positionLogic";
+import cLogic from "./logic/combatLogic";
 import KeyboardEventHandler from "./utility/KeyboardEventHandler";
 import "./css/Battle.css";
 
@@ -15,6 +16,8 @@ export default function Battle(props) {
 
     useEffect(() => {
         enemyPosRef.current = enemyPosition;
+        // maybe copy because it's a state variable
+        cLogic.currentEnemyPos = enemyPosition;
     }, [enemyPosition]);
     
     const handleEnemyMovement = () => {
@@ -31,7 +34,6 @@ export default function Battle(props) {
 
     return (
         <div id="b-container">
-
             <GameGrid 
             playerPosition={playerPosition}
             enemyPosition={enemyPosition} 
@@ -40,6 +42,7 @@ export default function Battle(props) {
             <AbilityGrid combatDisplay={true} hotbar={props.keybinds.hotbar} abilities={props.abilities} />
 
             <button onClick={goBack} style={{margin:"30px 0px 0px 15px", float: "left"}}>Back</button>
+            {cLogic.playerDmg}
             
             <KeyboardEventHandler
             keybinds={props.keybinds}
