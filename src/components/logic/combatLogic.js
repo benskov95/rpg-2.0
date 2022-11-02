@@ -3,17 +3,16 @@ import combatFacade from "../../facades/combatFacade";
 
 const combatLogic = () => {
     const abilitiesOnCd = [];
-    let currentEnemyPos = null;
-    let playerDmg = 0;
+    let lol = [];
 
-    const startAbilityCd = (btn, keybinds, setKeybinds, abilities, cellsRef, playerPosition) => {
+    const startAbilityCd = (btn, keybinds, setKeybinds, abilities, cellsRef, playerPosition, enemyPosition, setPlayerDmg) => {
         const updateInterval = 1000 / 60;
         let usedAbility = abilities.find(ab => ab.id === btn.abilityId);
         let cd = usedAbility.cooldown - updateInterval;
 
         if (abilitiesOnCd.find(ab => ab.name === btn.name) === undefined) {
             btn.opacity = "0.2";
-            beginAbilityAnimation(usedAbility, playerPosition, cellsRef);
+            beginAbilityAnimation(usedAbility, playerPosition, enemyPosition, cellsRef, setPlayerDmg);
         } else { 
             return;
         }
@@ -36,12 +35,12 @@ const combatLogic = () => {
         }, updateInterval);
     }
 
-    const beginAbilityAnimation = (usedAbility, playerPosition, cellsRef) => {
+    const beginAbilityAnimation = (usedAbility, playerPosition, enemyPosition, cellsRef, setPlayerDmg) => {
         let playerClass = classHandler["wizard"];
 
         for (const ability in playerClass) {
             if (ability === usedAbility.id) {
-                playerClass[ability](playerPosition, currentEnemyPos, cellsRef);
+                playerClass[ability](playerPosition, enemyPosition, cellsRef, setPlayerDmg);
                 break;
             }
         }
@@ -59,8 +58,7 @@ const combatLogic = () => {
     return {
         startAbilityCd,
         handleDamageCalculation,
-        currentEnemyPos,
-        playerDmg
+        lol
     }
 }
 

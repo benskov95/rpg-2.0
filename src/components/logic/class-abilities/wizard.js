@@ -4,7 +4,7 @@ import cLogic from "../combatLogic";
 
 const wizardAbilities = () => {
 
-    const fireball = (playerPosition, currentEnemyPos, cellsref) => {
+    const fireball = (playerPosition, enemyPosition, cellsref, setPlayerDmg) => {
         const animationIntervalMs = 500;
         const element = "fire";
         let animationTimeMs = 1500;
@@ -24,15 +24,19 @@ const wizardAbilities = () => {
                 }
                 return 0;
             });
+
             currentCell.style.backgroundColor = colorConverter[element];
             count++;
+            animationTimeMs -= animationIntervalMs;
 
-            if (currentEnemyPos.x === JSON.parse(currentCell.id).x 
-            && currentEnemyPos.y === JSON.parse(currentCell.id).y) {
-                cLogic.handleDamageCalculation({playerCharId: "Merlin", enemyId: "Imp", abilityId: "fireball"});
+            if (enemyPosition.x === JSON.parse(currentCell.id).x 
+            && enemyPosition.y === JSON.parse(currentCell.id).y) {
+                cLogic.handleDamageCalculation({playerCharId: "Merlin", enemyId: "Imp", abilityId: "fireball"})
+                .then(res => {
+                    setPlayerDmg(res.finalDmg);
+                })      
             }
 
-            animationTimeMs -= animationIntervalMs;
 
             if (animationTimeMs <= 0) {
                 setTimeout(() => {
@@ -44,7 +48,7 @@ const wizardAbilities = () => {
         }, animationIntervalMs);
     }
 
-    const frostbolt = (playerPosition, currentEnemyPos, cellsRef) => {
+    const frostbolt = (playerPosition, enemyPosition, cellsRef, setPlayerDmg) => {
         // debuff if hit - -20% resistance to fire
         const animationIntervalMs = 250;
         const element = "frost";
@@ -65,10 +69,18 @@ const wizardAbilities = () => {
                 }
                 return 0;
             });
+
             currentCell.style.backgroundColor = colorConverter[element];
             count++;
-
             animationTimeMs -= animationIntervalMs;
+
+            if (enemyPosition.x === JSON.parse(currentCell.id).x 
+            && enemyPosition.y === JSON.parse(currentCell.id).y) {
+                cLogic.handleDamageCalculation({playerCharId: "Merlin", enemyId: "Imp", abilityId: "fireball"})
+                .then(res => {
+                    setPlayerDmg(res.finalDmg);
+                })      
+            }
 
             if (animationTimeMs <= 0) {
                 setTimeout(() => {

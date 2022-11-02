@@ -57,7 +57,9 @@ export default function KeyboardEventHandler(props) {
                     props.setKeybinds,
                     props.abilityFuncArgs[0], 
                     props.abilityFuncArgs[1], 
-                    props.abilityFuncArgs[2]
+                    props.abilityFuncArgs[2],
+                    props.abilityFuncArgs[3],
+                    props.abilityFuncArgs[4]
                 );
             } else {
                 if (btn.keybind === key && !shiftDown && !altDown) {
@@ -68,7 +70,9 @@ export default function KeyboardEventHandler(props) {
                         props.setKeybinds,
                         props.abilityFuncArgs[0],
                         props.abilityFuncArgs[1], 
-                        props.abilityFuncArgs[2]
+                        props.abilityFuncArgs[2],
+                        props.abilityFuncArgs[3],
+                        props.abilityFuncArgs[4],
                         );
                     }
                 }

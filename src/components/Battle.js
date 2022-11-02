@@ -13,11 +13,10 @@ export default function Battle(props) {
     const cellsRef = useRef([]);
     const enemyPosRef = useRef(pLogic.initialPos);
     const navigate = useNavigate();
+    const [playerDmg, setPlayerDmg] = useState(0);
 
     useEffect(() => {
         enemyPosRef.current = enemyPosition;
-        // maybe copy because it's a state variable
-        cLogic.currentEnemyPos = enemyPosition;
     }, [enemyPosition]);
     
     const handleEnemyMovement = () => {
@@ -41,14 +40,14 @@ export default function Battle(props) {
             
             <AbilityGrid combatDisplay={true} hotbar={props.keybinds.hotbar} abilities={props.abilities} />
 
+            {playerDmg}
             <button onClick={goBack} style={{margin:"30px 0px 0px 15px", float: "left"}}>Back</button>
-            {cLogic.playerDmg}
-            
+
             <KeyboardEventHandler
             keybinds={props.keybinds}
             setKeybinds={props.setKeybinds}
             movementFuncArgs={[playerPosition, setPlayerPosition]} 
-            abilityFuncArgs={[props.abilities, cellsRef, playerPosition]} />
+            abilityFuncArgs={[props.abilities, cellsRef, playerPosition, enemyPosition, setPlayerDmg]} />
         </div>
     )
 }
