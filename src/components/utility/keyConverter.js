@@ -17,13 +17,15 @@ const keybindConverter = (keybind) => {
 
     if (parts.length === 1) {
         return keybind;
-    } else {
-        switch(parts[0]) {
-            case "shift":
-                return "S" + parts[1];
-            case "alt":
-                return "A" + parts[1];
-        }
+    }
+
+    switch(parts[0]) {
+        case "shift":
+            return "S" + parts[1];
+        case "alt":
+            return "A" + parts[1];
+        default:
+            return "N/A";
     }
 }
 

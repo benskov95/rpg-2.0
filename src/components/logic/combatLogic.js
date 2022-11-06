@@ -1,9 +1,7 @@
 import classHandler from "./classHandler";
-import combatFacade from "../../facades/combatFacade";
 
 const combatLogic = () => {
     const abilitiesOnCd = [];
-    let lol = [];
 
     const startAbilityCd = (btn, keybinds, setKeybinds, abilities, cellsRef, playerPosition, enemyPosition, setPlayerDmg) => {
         const updateInterval = 1000 / 60;
@@ -46,19 +44,8 @@ const combatLogic = () => {
         }
     }
 
-    const handleDamageCalculation = async (dmgEvent) => {
-        try {
-            const res = await combatFacade.calculatePlayerDamage(dmgEvent);
-            return res;
-        } catch (e) {
-            console.log(e);
-        }
-    }
-
     return {
         startAbilityCd,
-        handleDamageCalculation,
-        lol
     }
 }
 

@@ -6,9 +6,9 @@
 }
 
 .game-grid {
-    width: 34.5vw;
-    margin: 20vh 0px 0px 0vw;
+    margin-top: 20vh;
     display: grid;
+    width: 34.5vw;
     padding: 3px;
     grid-gap: 5px;
     grid-template-columns: repeat(8, 11vw);
@@ -21,8 +21,32 @@
     border-radius: 5px;
 }
 
+.participant {
+    width: 7vh;
+    height: 7vh;
+    margin: 1vh auto 0vh auto;
+}
+
 .participant-img {
-    width: 5.5vh;
-    height: 5.5vh;
-    margin-top: 2.75vh;
+    width: inherit;
+    height: inherit;
+}
+
+.health-label {
+    position: absolute;
+    width: inherit;
+    text-align: center;
+    margin: 7.5vh 0px 0px -7vh;
+    z-index: 2;
+    font-size: 0.7rem;
+}
+
+.health-bar {
+    background-color: green;
+    border: none;
+    width: 7vh;
+    height: 1.5vh;
+    display: block;
+    margin: auto;
+    position: relative;
 }

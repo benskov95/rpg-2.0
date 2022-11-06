@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import AbilityGrid from "./reusable-components/AbilityGrid";
 import GameGrid from "./battle-components/GameGrid";
 import pLogic from "./logic/positionLogic";
-import cLogic from "./logic/combatLogic";
 import KeyboardEventHandler from "./utility/KeyboardEventHandler";
 import "./css/Battle.css";
 
@@ -12,8 +11,8 @@ export default function Battle(props) {
     const [enemyPosition, setEnemyPosition] = useState(pLogic.eInitialPos);
     const cellsRef = useRef([]);
     const enemyPosRef = useRef(pLogic.initialPos);
-    const navigate = useNavigate();
     const [playerDmg, setPlayerDmg] = useState(0);
+    const navigate = useNavigate();
 
     useEffect(() => {
         enemyPosRef.current = enemyPosition;
@@ -36,7 +35,9 @@ export default function Battle(props) {
             <GameGrid 
             playerPosition={playerPosition}
             enemyPosition={enemyPosition} 
-            cellsRef={cellsRef} />
+            cellsRef={cellsRef} 
+            playerDmg={playerDmg}
+            setPlayerDmg={setPlayerDmg} />
             
             <AbilityGrid combatDisplay={true} hotbar={props.keybinds.hotbar} abilities={props.abilities} />
 

@@ -1,6 +1,6 @@
 import colorConverter from "../../utility/dmgElemToColor";
 import pLogic from "../positionLogic";
-import cLogic from "../combatLogic";
+import combatFacade from "../../../facades/combatFacade";
 
 const wizardAbilities = () => {
 
@@ -31,10 +31,13 @@ const wizardAbilities = () => {
 
             if (enemyPosition.x === JSON.parse(currentCell.id).x 
             && enemyPosition.y === JSON.parse(currentCell.id).y) {
-                cLogic.handleDamageCalculation({playerCharId: "Merlin", enemyId: "Imp", abilityId: "fireball"})
-                .then(res => {
-                    setPlayerDmg(res.finalDmg);
-                })      
+                setPlayerDmg(10);
+                // combatFacade.calculatePlayerDamage({playerCharId: "Merlin", enemyId: "Imp", abilityId: "fireball"})
+                // .then(res => {
+                //     setPlayerDmg(res.finalDmg);
+                // }).catch(err => {
+                //     console.log(err)
+                // })      
             }
 
 
@@ -76,10 +79,12 @@ const wizardAbilities = () => {
 
             if (enemyPosition.x === JSON.parse(currentCell.id).x 
             && enemyPosition.y === JSON.parse(currentCell.id).y) {
-                cLogic.handleDamageCalculation({playerCharId: "Merlin", enemyId: "Imp", abilityId: "fireball"})
+                combatFacade.calculatePlayerDamage({playerCharId: "Merlin", enemyId: "Imp", abilityId: "fireball"})
                 .then(res => {
                     setPlayerDmg(res.finalDmg);
-                })      
+                }).catch(err => {
+                    console.log(err)
+                })         
             }
 
             if (animationTimeMs <= 0) {
