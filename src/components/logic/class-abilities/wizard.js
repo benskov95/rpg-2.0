@@ -25,21 +25,25 @@ const wizardAbilities = () => {
                 return 0;
             });
 
+            // if the animation hits the edge of the grid, stop the animation.
+            if (currentCell === undefined) {
+                clearInterval(i);
+                return; 
+            }
+
             currentCell.style.backgroundColor = colorConverter[element];
             count++;
             animationTimeMs -= animationIntervalMs;
 
             if (enemyPosition.x === JSON.parse(currentCell.id).x 
             && enemyPosition.y === JSON.parse(currentCell.id).y) {
-                setPlayerDmg(10);
-                // combatFacade.calculatePlayerDamage({playerCharId: "Merlin", enemyId: "Imp", abilityId: "fireball"})
-                // .then(res => {
-                //     setPlayerDmg(res.finalDmg);
-                // }).catch(err => {
-                //     console.log(err)
-                // })      
+                combatFacade.calculatePlayerDamage({playerCharId: "Merlin", enemyId: "Imp", abilityId: "fireball"})
+                .then(res => {
+                    setPlayerDmg(res);
+                }).catch(err => {
+                    console.log(err)
+                })      
             }
-
 
             if (animationTimeMs <= 0) {
                 setTimeout(() => {
@@ -73,15 +77,20 @@ const wizardAbilities = () => {
                 return 0;
             });
 
+            if (currentCell === undefined) {
+                clearInterval(i);
+                return; 
+            }
+
             currentCell.style.backgroundColor = colorConverter[element];
             count++;
             animationTimeMs -= animationIntervalMs;
 
             if (enemyPosition.x === JSON.parse(currentCell.id).x 
             && enemyPosition.y === JSON.parse(currentCell.id).y) {
-                combatFacade.calculatePlayerDamage({playerCharId: "Merlin", enemyId: "Imp", abilityId: "fireball"})
+                combatFacade.calculatePlayerDamage({playerCharId: "Merlin", enemyId: "Imp", abilityId: "frostbolt"})
                 .then(res => {
-                    setPlayerDmg(res.finalDmg);
+                    setPlayerDmg(res);
                 }).catch(err => {
                     console.log(err)
                 })         
