@@ -4,7 +4,7 @@ import combatFacade from "../../../facades/combatFacade";
 
 const wizardAbilities = () => {
 
-    const fireball = (playerPosition, enemyPosition, cellsref, setPlayerDmg) => {
+    const fireball = (playerPosition, enemyPosition, cellsRef, setPlayerDmgEvent) => {
         const animationIntervalMs = 500;
         const element = "fire";
         let animationTimeMs = 1500;
@@ -16,7 +16,7 @@ const wizardAbilities = () => {
                 currentCell.style.backgroundColor = "";
             }
             
-            currentCell = cellsref.current.find(cell => {
+            currentCell = cellsRef.current.find(cell => {
                 let cellCoords = JSON.parse(cell.id);
                 if (cellCoords.x === (playerPosition.x + count) && 
                     cellCoords.y === playerPosition.y) {
@@ -37,9 +37,9 @@ const wizardAbilities = () => {
 
             if (enemyPosition.x === JSON.parse(currentCell.id).x 
             && enemyPosition.y === JSON.parse(currentCell.id).y) {
-                combatFacade.calculatePlayerDamage({playerCharId: "Merlin", enemyId: "Imp", abilityId: "fireball"})
+                combatFacade.calculatePlayerDamage({initiatorType: "player", playerCharId: "Merlin", enemyId: "Imp", abilityId: "fireball"})
                 .then(res => {
-                    setPlayerDmg(res);
+                    setPlayerDmgEvent(res);
                 }).catch(err => {
                     console.log(err)
                 })      
@@ -55,7 +55,7 @@ const wizardAbilities = () => {
         }, animationIntervalMs);
     }
 
-    const frostbolt = (playerPosition, enemyPosition, cellsRef, setPlayerDmg) => {
+    const frostbolt = (playerPosition, enemyPosition, cellsRef, setPlayerDmgEvent) => {
         // debuff if hit - -20% resistance to fire
         const animationIntervalMs = 250;
         const element = "frost";
@@ -90,7 +90,7 @@ const wizardAbilities = () => {
             && enemyPosition.y === JSON.parse(currentCell.id).y) {
                 combatFacade.calculatePlayerDamage({playerCharId: "Merlin", enemyId: "Imp", abilityId: "frostbolt"})
                 .then(res => {
-                    setPlayerDmg(res);
+                    setPlayerDmgEvent(res);
                 }).catch(err => {
                     console.log(err)
                 })         
@@ -106,7 +106,7 @@ const wizardAbilities = () => {
         }, animationIntervalMs);
     }
 
-    const wallOfIce = (playerPosition, currentEnemyPos, cellsRef) => {
+    const wallOfIce = (playerPosition, _, cellsRef, __) => {
         const animationTimeMs = 8000;
         const element = "frost";
         const secondCell = playerPosition.y === 0 ? 1 : playerPosition.y - 1; 

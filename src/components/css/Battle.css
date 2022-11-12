@@ -1,17 +1,16 @@
 
 #b-container {
-    margin: auto;
-    margin-top: 5vh;
     width: 90vw;
+    margin: auto;
 }
 
 .game-grid {
-    margin-top: 20vh;
     display: grid;
-    width: 34.5vw;
+    justify-content: center;
+    margin-top: 25vh;
     padding: 3px;
     grid-gap: 5px;
-    grid-template-columns: repeat(8, 11vw);
+    grid-template-columns: repeat(8, 8vw);
 }
 
 .cell {
@@ -32,14 +31,14 @@
     height: inherit;
 }
 
-.dmg-value {
+.dmg-display {
     position: absolute;
     margin-left: 1.5rem;
     animation: float-up 2.5s forwards, fade-out 1s forwards;
     animation-delay: 0s, 1s;
 }
 
-.dot-value {
+.dot-display {
     position: absolute;
     margin-left: 3rem;
     animation: float-up 2.5s forwards, fade-out 1.5s forwards;

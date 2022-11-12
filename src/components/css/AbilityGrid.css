@@ -1,10 +1,9 @@
 
 #c-ability-grid {
+    display: flex;
+    justify-content: center;
     margin-top: 1vh;
-    display: grid;
     padding: 3px;
-    grid-gap: 5px;
-    grid-template-columns: repeat(5, 3vw);
 }
 
 #e-ability-grid {
@@ -19,6 +18,7 @@
     background-color: #444;
     height: 3vw;
     width: 3vw;
+    margin-right: 2px;
     border: 1px solid gray;
     border-radius: 50px;
     cursor: pointer;

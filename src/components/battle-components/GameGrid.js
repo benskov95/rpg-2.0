@@ -5,39 +5,38 @@ import iconConverter from "../utility/iconConverter";
 export default function GameGrid(props) {
     const playerHpRef = useRef();
     const enemyHpRef = useRef();
-    const {playerDmg} = props;
-    const [dmgDisplay, setDmgDisplay] = useState({pDmgList: [], eDmgList: []});
-    const cRef = useRef(0);
+    const {playerDmgEvent} = props;
+    const [dmgEvents, setDmgEvents] = useState({pDmgList: [], eDmgList: []});
+    const counterRef = useRef(0);
 
     useEffect(() => {
         handleDmgEvent();
-    }, [playerDmg]);
+    }, [playerDmgEvent]);
 
     const handleDmgEvent = () => {
-        if (playerDmg.finalDmg !== 0 && playerDmg.finalDmg !== undefined) {
-            enemyHpRef.current.value -= playerDmg.finalDmg;
-            let copy = {...dmgDisplay};
-            copy.eDmgList.push(playerDmg);
-            setDmgDisplay(copy);
+        if (playerDmgEvent.directDmg !== 0 && playerDmgEvent.directDmg !== undefined) {
+            enemyHpRef.current.value -= playerDmgEvent.directDmg;
+            let copy = {...dmgEvents};
+            copy.eDmgList.push(playerDmgEvent);
+            setDmgEvents(copy);
 
-            if (playerDmg.dotValues.length > 0) {
-                handleDotDamage(playerDmg.dotValues, playerDmg.dotInterval);
+            if (playerDmgEvent.dotValues.length > 0) {
+                handleDotDamage(playerDmgEvent);
             }
         }
-
     }
 
-    const handleDotDamage = (dotValues, dotInterval) => {
-        enemyHpRef.current.value -= dotValues[cRef.current];
-        cRef.current += 1;
-
-        if (cRef.current < dotValues.length) {
-            setTimeout(() => {
-                handleDotDamage(dotValues, dotInterval);
-            }, dotInterval);
-        } else {
-            cRef.current = 0;
-        }
+    const handleDotDamage = (playerDmgEvent) => {
+        const i = setInterval(() => {
+            if (counterRef.current < playerDmgEvent.dotValues.length) {
+                enemyHpRef.current.value -= playerDmgEvent.dotValues[counterRef.current];
+                counterRef.current += 1;
+                return;
+            } else {
+                counterRef.current = 0;
+                clearInterval(i);
+            }
+        }, playerDmgEvent.dotInterval);
     }
 
     return (
@@ -61,21 +60,21 @@ export default function GameGrid(props) {
                                 }
                                 {cell === pLogic.battleGrid[props.enemyPosition.y][props.enemyPosition.x] &&
                                     <div className="participant">
-                                        {dmgDisplay.eDmgList.map((dmgEvent, abIndex) => {
+                                        {dmgEvents.eDmgList.map((dmgEvent, abIndex) => {
                                             return (
                                                 <div key={`ab${abIndex}`}>
                                                     <p 
-                                                    className="dmg-value" 
+                                                    className="dmg-display" 
                                                     style={{fontSize: dmgEvent.isCrit ? "1.5rem" : "1.2rem"}}>
-                                                        {dmgEvent.isCrit ? `${dmgEvent.finalDmg} (crit)` : dmgEvent.finalDmg}
+                                                        {dmgEvent.isCrit ? `${dmgEvent.directDmg} (crit)` : dmgEvent.directDmg}
                                                     </p>
 
                                                     {dmgEvent.dotValues.map((dotVal, dotIndex) => {
                                                         return (
                                                             <p 
-                                                            className="dot-value" 
+                                                            className="dot-display" 
                                                             key={`dot${dotIndex}`} 
-                                                            style={{animationDelay: `${dotIndex * 1}s`}}>
+                                                            style={{animationDelay: `${(dotIndex + 1) * dmgEvent.dotInterval}ms`}}>
                                                                 {dotVal}
                                                             </p>
                                                         )

@@ -3,14 +3,14 @@ import classHandler from "./classHandler";
 const combatLogic = () => {
     const abilitiesOnCd = [];
 
-    const startAbilityCd = (btn, keybinds, setKeybinds, abilities, cellsRef, playerPosition, enemyPosition, setPlayerDmg) => {
+    const startAbilityCd = (btn, keybinds, setKeybinds, abilities, cellsRef, playerPosition, enemyPosition, setPlayerDmgEvent) => {
         const updateInterval = 1000 / 60;
         let usedAbility = abilities.find(ab => ab.id === btn.abilityId);
         let cd = usedAbility.cooldown - updateInterval;
 
         if (abilitiesOnCd.find(ab => ab.name === btn.name) === undefined) {
             btn.opacity = "0.2";
-            beginAbilityAnimation(usedAbility, playerPosition, enemyPosition, cellsRef, setPlayerDmg);
+            beginAbilityAnimation(usedAbility, playerPosition, enemyPosition, cellsRef, setPlayerDmgEvent);
         } else { 
             return;
         }
@@ -33,12 +33,12 @@ const combatLogic = () => {
         }, updateInterval);
     }
 
-    const beginAbilityAnimation = (usedAbility, playerPosition, enemyPosition, cellsRef, setPlayerDmg) => {
+    const beginAbilityAnimation = (usedAbility, playerPosition, enemyPosition, cellsRef, setPlayerDmgEvent) => {
         let playerClass = classHandler["wizard"];
 
         for (const ability in playerClass) {
             if (ability === usedAbility.id) {
-                playerClass[ability](playerPosition, enemyPosition, cellsRef, setPlayerDmg);
+                playerClass[ability](playerPosition, enemyPosition, cellsRef, setPlayerDmgEvent);
                 break;
             }
         }

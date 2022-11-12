@@ -29,16 +29,6 @@ export default function AbilityGrid(props) {
             </div>
             <div className="ability">
             </div>
-            <div className="ability">
-            </div>
-            <div className="ability">
-            </div>
-            <div className="ability">
-            </div>
-            <div className="ability">
-            </div>
-            <div className="ability">
-            </div>
         </div>
     )
 }
