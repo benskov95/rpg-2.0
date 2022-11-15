@@ -1,22 +1,23 @@
 import classHandler from "./classHandler";
 
 const combatLogic = () => {
-    const abilitiesOnCd = [];
+    const pAbilitiesOnCd = [];
+    const eAbilitiesOnCd = [];
 
-    const startAbilityCd = (btn, keybinds, setKeybinds, abilities, cellsRef, playerPosition, enemyPosition, setPlayerDmgEvent) => {
+    const startPlayerAbilityCd = (btn, keybinds, setKeybinds, abilities, cellsRef, playerPosition, enemyPosition, setPlayerDmgEvent) => {
         const updateInterval = 1000 / 60;
         let usedAbility = abilities.find(ab => ab.id === btn.abilityId);
         let cd = usedAbility.cooldown - updateInterval;
 
-        if (abilitiesOnCd.find(ab => ab.name === btn.name) === undefined) {
+        if (pAbilitiesOnCd.find(ab => ab.name === btn.name) === undefined) {
             btn.opacity = "0.2";
-            beginAbilityAnimation(usedAbility, playerPosition, enemyPosition, cellsRef, setPlayerDmgEvent);
+            beginAbilityAnimation("wizard", usedAbility.id, playerPosition, enemyPosition, cellsRef, setPlayerDmgEvent);
         } else { 
             return;
         }
 
         let abilityOnCd = {name: btn.name};
-        abilitiesOnCd.push(abilityOnCd);
+        pAbilitiesOnCd.push(abilityOnCd);
 
         abilityOnCd.activeCd = setInterval(() => {
             let copy = {...keybinds};
@@ -28,24 +29,36 @@ const combatLogic = () => {
                 btn.opacity = "1";
                 btn.cdText = "";
                 clearInterval(abilityOnCd.activeCd);
-                abilitiesOnCd.splice(abilitiesOnCd.indexOf(abilityOnCd));
+                pAbilitiesOnCd.splice(pAbilitiesOnCd.indexOf(abilityOnCd));
             }
         }, updateInterval);
     }
 
-    const beginAbilityAnimation = (usedAbility, playerPosition, enemyPosition, cellsRef, setPlayerDmgEvent) => {
-        let playerClass = classHandler["wizard"];
+    const startEnemyAbilityCd = (ability, playerPosition, enemyPosition, cellsRef, setEnemyDmgEvent) => {
+        let abOnCd = eAbilitiesOnCd.find(a => a.id === ability.id);
+        if (abOnCd !== undefined) return;
 
-        for (const ability in playerClass) {
-            if (ability === usedAbility.id) {
-                playerClass[ability](playerPosition, enemyPosition, cellsRef, setPlayerDmgEvent);
+        eAbilitiesOnCd.push(ability);
+        beginAbilityAnimation("enemy", ability.id, playerPosition, enemyPosition, cellsRef, setEnemyDmgEvent);
+        setTimeout(() => {
+            eAbilitiesOnCd.pop();
+        }, ability.cooldown);
+    }
+
+    const beginAbilityAnimation = (initiator, abilityId, playerPosition, enemyPosition, cellsRef, setDmgEvent) => {
+        let classAbilities = classHandler[initiator];
+
+        for (const abilityName in classAbilities) {
+            if (abilityName === abilityId) {
+                classAbilities[abilityName](playerPosition, enemyPosition, cellsRef, setDmgEvent);
                 break;
             }
         }
     }
 
     return {
-        startAbilityCd,
+        startPlayerAbilityCd,
+        startEnemyAbilityCd,
     }
 }
 

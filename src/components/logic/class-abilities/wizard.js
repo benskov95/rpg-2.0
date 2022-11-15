@@ -88,7 +88,7 @@ const wizardAbilities = () => {
 
             if (enemyPosition.x === JSON.parse(currentCell.id).x 
             && enemyPosition.y === JSON.parse(currentCell.id).y) {
-                combatFacade.calculatePlayerDamage({playerCharId: "Merlin", enemyId: "Imp", abilityId: "frostbolt"})
+                combatFacade.calculatePlayerDamage({initiatorType: "player", playerCharId: "Merlin", enemyId: "Imp", abilityId: "frostbolt"})
                 .then(res => {
                     setPlayerDmgEvent(res);
                 }).catch(err => {

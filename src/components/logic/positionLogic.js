@@ -12,36 +12,36 @@ const positionLogic = () => {
     let blockedCells = [];
 
     
-    const handlePlayerMovement = (key, playerPosition, setPlayerPosition) => {
+    const handlePlayerMovement = (key, enemyPosition, playerPosition, setPlayerPosition) => {
         let newPos = {...playerPosition};
         
         switch(key) {
             case "up":
                 if (playerPosition.y > 0) {
                     newPos.y -= 1;
-                    let check = confirmNewPosValidity(newPos);
-                    if (check) setPlayerPosition(newPos);
+                    let isValid = confirmNewPosValidity(enemyPosition, newPos);
+                    if (isValid) setPlayerPosition(newPos);
                 } 
                 break;
             case "right":
                 if (playerPosition.x < (battleGrid[0].length - 1)) {
                     newPos.x += 1;
-                    let check = confirmNewPosValidity(newPos);
-                    if (check) setPlayerPosition(newPos);
+                    let isValid = confirmNewPosValidity(enemyPosition, newPos);
+                    if (isValid) setPlayerPosition(newPos);
                 }
                 break;
             case "down":
                 if (playerPosition.y < (battleGrid.length - 1)) {
                     newPos.y += 1;
-                    let check = confirmNewPosValidity(newPos);
-                    if (check) setPlayerPosition(newPos);
+                    let isValid = confirmNewPosValidity(enemyPosition, newPos);
+                    if (isValid) setPlayerPosition(newPos);
                 }
                 break;
             case "left":
                 if (playerPosition.x > 0) {
                     newPos.x -= 1;
-                    let check = confirmNewPosValidity(newPos);
-                    if (check) setPlayerPosition(newPos);
+                    let isValid = confirmNewPosValidity(enemyPosition, newPos);
+                    if (isValid) setPlayerPosition(newPos);
                 }
                 break;
             default:
@@ -72,7 +72,7 @@ const positionLogic = () => {
         return posList;
     }
     
-    const findCoordinatesForPos = (selectedCell, setEnemyPosition) => {
+    const findCoordinatesForPos = (selectedCell, setEnemyPosition, playerPosition) => {
         let yCount = 0;
         let newPos;
 
@@ -86,7 +86,8 @@ const positionLogic = () => {
             for (let cell of row) {
                 if (cell === selectedCell) {
                     let newPos = {x: xCount, y: yCount};
-                    setEnemyPosition(newPos);
+                    let isValid = confirmNewPosValidity(playerPosition, newPos);
+                    if (isValid) setEnemyPosition(newPos);
                     break;
                 } else {
                     xCount++;
@@ -105,7 +106,7 @@ const positionLogic = () => {
         blockedCells = newList;
     }
             
-    const confirmNewPosValidity = (newPos) => {
+    const confirmNewPosValidity = (opponentPos, newPos) => {
         if (blockedCells.length > 0) {
             for (let cell of blockedCells) {
                 let cellCoords = JSON.parse(cell.id);
@@ -115,6 +116,11 @@ const positionLogic = () => {
                 }
             }
         }
+
+        if (opponentPos.x === newPos.x && opponentPos.y === newPos.y) {
+            return false;
+        }
+        
         return true;
     }
 

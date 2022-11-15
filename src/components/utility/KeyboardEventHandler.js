@@ -50,7 +50,7 @@ export default function KeyboardEventHandler(props) {
                 || (altDown && btn.keybind.includes("alt") 
                 && btn.keybind.includes(key))) {
 
-                cLogic.startAbilityCd
+                cLogic.startPlayerAbilityCd
                 (
                     btn,
                     props.keybinds,
@@ -59,11 +59,11 @@ export default function KeyboardEventHandler(props) {
                     props.abilityFuncArgs[1], 
                     props.abilityFuncArgs[2],
                     props.abilityFuncArgs[3],
-                    props.abilityFuncArgs[4]
+                    props.abilityFuncArgs[4],
                 );
             } else {
                 if (btn.keybind === key && !shiftDown && !altDown) {
-                    cLogic.startAbilityCd
+                    cLogic.startPlayerAbilityCd
                     (
                         btn, 
                         props.keybinds,
@@ -85,7 +85,8 @@ export default function KeyboardEventHandler(props) {
                 (
                     keybind, 
                     props.movementFuncArgs[0], 
-                    props.movementFuncArgs[1]
+                    props.movementFuncArgs[1],
+                    props.movementFuncArgs[2],
                 );
             }
         }

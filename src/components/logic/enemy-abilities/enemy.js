@@ -3,7 +3,7 @@ import combatFacade from "../../../facades/combatFacade";
 
 const enemyAbilities = () => {
 
-    const singe = (enemyPosition, playerPosition, cellsRef, setEnemyDmgEvent) => {
+    const singe = (playerPosition, enemyPosition, cellsRef, setEnemyDmgEvent) => {
         const animationIntervalMs = 400;
         const element = "fire";
         let animationTimeMs = 1200;
@@ -17,8 +17,8 @@ const enemyAbilities = () => {
             
             currentCell = cellsRef.current.find(cell => {
                 let cellCoords = JSON.parse(cell.id);
-                if (cellCoords.x === (playerPosition.x + count) && 
-                    cellCoords.y === playerPosition.y) {
+                if (cellCoords.x === (enemyPosition.x + count) && 
+                    cellCoords.y === enemyPosition.y) {
                         return cell;
                 }
                 return 0;
@@ -34,8 +34,8 @@ const enemyAbilities = () => {
             count--;
             animationTimeMs -= animationIntervalMs;
 
-            if (enemyPosition.x === JSON.parse(currentCell.id).x 
-            && enemyPosition.y === JSON.parse(currentCell.id).y) {
+            if (playerPosition.x === JSON.parse(currentCell.id).x 
+            && playerPosition.y === JSON.parse(currentCell.id).y) {
                 combatFacade.calculatePlayerDamage({initiatorType: "enemy", playerCharId: "Merlin", enemyId: "Imp", abilityId: "singe"})
                 .then(res => {
                     setEnemyDmgEvent(res);
@@ -58,3 +58,6 @@ const enemyAbilities = () => {
         singe,
     }
 }
+
+const enemy = enemyAbilities();
+export default enemy;
