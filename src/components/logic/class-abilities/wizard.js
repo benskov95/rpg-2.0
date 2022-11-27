@@ -4,7 +4,7 @@ import combatFacade from "../../../facades/combatFacade";
 
 const wizardAbilities = () => {
 
-    const fireball = (playerPosition, enemyPosition, cellsRef, setPlayerDmgEvent) => {
+    const fireball = (playerPosition, enemyPosition, cellsRef, setPlayerCombatEvent) => {
         const animationIntervalMs = 500;
         const element = "fire";
         let animationTimeMs = 1500;
@@ -39,7 +39,7 @@ const wizardAbilities = () => {
             && enemyPosition.y === JSON.parse(currentCell.id).y) {
                 combatFacade.calculatePlayerDamage({initiatorType: "player", playerCharId: "Merlin", enemyId: "Imp", abilityId: "fireball"})
                 .then(res => {
-                    setPlayerDmgEvent(res);
+                    setPlayerCombatEvent(res);
                 }).catch(err => {
                     console.log(err)
                 })      
@@ -55,7 +55,7 @@ const wizardAbilities = () => {
         }, animationIntervalMs);
     }
 
-    const frostbolt = (playerPosition, enemyPosition, cellsRef, setPlayerDmgEvent) => {
+    const frostbolt = (playerPosition, enemyPosition, cellsRef, setPlayerCombatEvent) => {
         // debuff if hit - -20% resistance to fire
         const animationIntervalMs = 250;
         const element = "frost";
@@ -90,7 +90,7 @@ const wizardAbilities = () => {
             && enemyPosition.y === JSON.parse(currentCell.id).y) {
                 combatFacade.calculatePlayerDamage({initiatorType: "player", playerCharId: "Merlin", enemyId: "Imp", abilityId: "frostbolt"})
                 .then(res => {
-                    setPlayerDmgEvent(res);
+                    setPlayerCombatEvent(res);
                 }).catch(err => {
                     console.log(err)
                 })         
@@ -106,7 +106,7 @@ const wizardAbilities = () => {
         }, animationIntervalMs);
     }
 
-    const wallOfIce = (playerPosition, _, cellsRef, __) => {
+    const wallOfIce = (playerPosition, _, cellsRef, setPlayerCombatEvent) => {
         const animationTimeMs = 8000;
         const element = "frost";
         const secondCell = playerPosition.y === 0 ? 1 : playerPosition.y - 1; 
@@ -133,6 +133,8 @@ const wizardAbilities = () => {
             cell.style.backgroundColor = colorConverter[element];
             pLogic.blockedCells.push(cell);
         })
+
+        setPlayerCombatEvent({abilityId: "Wall of Ice"});
 
         setTimeout(() => {
             pLogic.clearBlockedCells(usedCells);

@@ -10,31 +10,28 @@ import cLogic from "./logic/combatLogic";
 export default function Battle(props) {
     const [playerPosition, setPlayerPosition] = useState(pLogic.pInitialPos);
     const [enemyPosition, setEnemyPosition] = useState(pLogic.eInitialPos);
-    const playerPosRef = useRef(pLogic.pInitialPos);
-    const enemyPosRef = useRef(pLogic.initialPos);
+    const [playerCombatEvent, setPlayerCombatEvent] = useState({});
+    const [enemyCombatEvent, setEnemyCombatEvent] = useState({});
+    const playerPosRef = useRef(playerPosition);
+    const enemyPosRef = useRef(enemyPosition);
     const cellsRef = useRef([]);
-    const [playerDmgEvent, setPlayerDmgEvent] = useState({});
-    const [enemyDmgEvent, setEnemyDmgEvent] = useState({});
-    const navigate = useNavigate();
 
-    useEffect(() => {
-        enemyPosRef.current = enemyPosition;
-    }, [enemyPosition]);
-
+    // make smth like a combat log instead of dmg numbers (rerenders too annoying and cant find a good solution)
     useEffect(() => {
         playerPosRef.current = playerPosition;
-    }, [playerPosition]);
+        enemyPosRef.current = enemyPosition;
+    }, [playerPosition, enemyPosition]);
 
-    useEffect(() => {
-        handleEnemyActions();
-    }, []);
+    // useEffect(() => {
+    //     handleEnemyActions();
+    // }, []);
     
     const handleEnemyActions = () => {
         setInterval(() => {
             let availablePosList = pLogic.findAvailablePositions(enemyPosRef.current);
             let selectedPos = Math.floor(Math.random() * availablePosList.length);
             pLogic.findCoordinatesForPos(availablePosList[selectedPos], setEnemyPosition, playerPosition);
-            cLogic.startEnemyAbilityCd({id: "singe", cooldown: 5000}, playerPosRef.current, enemyPosRef.current, cellsRef, setEnemyDmgEvent);
+            // cLogic.startEnemyAbilityCd({id: "singe", cooldown: 5000}, playerPosRef.current, enemyPosRef.current, cellsRef, setEnemyDmgEvent);
         }, 1000);
     }
 
@@ -44,8 +41,8 @@ export default function Battle(props) {
             playerPosition={playerPosition}
             enemyPosition={enemyPosition} 
             cellsRef={cellsRef} 
-            playerDmgEvent={playerDmgEvent}
-            enemyDmgEvent={enemyDmgEvent} />
+            playerCombatEvent={playerCombatEvent}
+            enemyCombatEvent={enemyCombatEvent} />
             
             <AbilityGrid combatDisplay={true} hotbar={props.keybinds.hotbar} abilities={props.abilities} />
 
@@ -53,7 +50,7 @@ export default function Battle(props) {
             keybinds={props.keybinds}
             setKeybinds={props.setKeybinds}
             movementFuncArgs={[enemyPosition, playerPosition, setPlayerPosition]} 
-            abilityFuncArgs={[props.abilities, cellsRef, playerPosition, enemyPosition, setPlayerDmgEvent]} />
+            abilityFuncArgs={[props.abilities, cellsRef, playerPosRef, enemyPosRef, setPlayerCombatEvent]} />
         </div>
     )
 }
